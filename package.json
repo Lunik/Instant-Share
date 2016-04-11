@@ -1,0 +1,18 @@
+{
+  "name": "instant-share-web",
+  "version": "1.0.0",
+  "description": "Share file directly to your friends",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lunik/Instante-Share-Web.git"
+  },
+  "author": "lunik <guillaume.lunik@gmail.com> (http://lunik.xyz)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lunik/Instante-Share-Web/issues"
+  },
+  "homepage": "https://github.com/Lunik/Instante-Share-Web#readme"
+}
