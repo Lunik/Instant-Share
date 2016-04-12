@@ -5,7 +5,7 @@ $(window).bind('hashchange', function(){
 
 // Get Hash on loading page
 $(document).ready(function(){
-  initSeed()
+  initHolder()
   getHash()
 })
 
@@ -16,6 +16,33 @@ function getHash(){
     console.log("New Hash: "+hash)
     download(hash);
   }
+}
+
+// Initialise seed torrent
+function initHolder(){
+  var holder = document.getElementsByClassName('holder')[0];
+  var state = document.getElementsByClassName('status')[0];
+
+  if (typeof window.FileReader === 'undefined') {
+    state.id = 'fail';
+    state.innerHTML = 'Instant Share indisponible';
+  } else {
+    state.id = 'success';
+    state.innerHTML = 'Instant Share disponible';
+  }
+
+  holder.ondragover = function () { this.id = 'hover'; return false; };
+  holder.ondragend = function () { this.id = ''; return false; };
+  holder.ondrop = function (e) {
+    this.id = '';
+    e.preventDefault();
+
+    var file = e.dataTransfer.files[0]
+
+    console.log(file);
+    var client = new WebTorrent()
+    client.seed(file,onTorrentSeed);
+  };
 }
 
 // Initialise event on torrent
@@ -59,33 +86,6 @@ function onTorrentDownload(torrent){
 //Clean holder body
 function cleanBody(){
   $('.holder').html('')
-}
-
-// Initialise seed torrent
-function initSeed(){
-  var holder = document.getElementsByClassName('holder')[0];
-  var state = document.getElementsByClassName('status')[0];
-
-  if (typeof window.FileReader === 'undefined') {
-    state.id = 'fail';
-    state.innerHTML = 'Instant Share indisponible';
-  } else {
-    state.id = 'success';
-    state.innerHTML = 'Instant Share disponible';
-  }
-
-  holder.ondragover = function () { this.id = 'hover'; return false; };
-  holder.ondragend = function () { this.id = ''; return false; };
-  holder.ondrop = function (e) {
-    this.id = '';
-    e.preventDefault();
-
-    var file = e.dataTransfer.files[0]
-
-    console.log(file);
-    var client = new WebTorrent()
-    client.seed(file,onTorrentSeed);
-  };
 }
 
 // Callback function when torrent is seeding
