@@ -64,7 +64,7 @@ function initHolder(){
 
   upload_but.on('change', function(){
     file_name.text(this.files[0].name)
-    //seed(this.files[0]);
+    seed(this.files[0]);
   })
 }
 
