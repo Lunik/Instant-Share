@@ -6,6 +6,21 @@ body {
   color: #fff;
 }
 
+p {
+  text-align: center;
+}
+
+a {
+  color: #F7A253;
+}
+
+a:hover, a:focus, a:active{
+  color: #F75353;
+}
+/***********/
+/* Wrapper */
+/***********/
+
 .wrapper {
   width: 500px;
   margin: 0 auto;
@@ -17,6 +32,9 @@ body {
   text-align: center;
 }
 
+/***********/
+/*  Status */
+/***********/
 .status {
   padding: 5px;
   background: #ccc;
@@ -30,6 +48,9 @@ body {
   background: #27AE60;
 }
 
+/***********/
+/* Holder  */
+/***********/
 .holder {
     border: 10px dashed #ccc;
     width: 400px;
@@ -50,17 +71,9 @@ body {
   height: 100%;
 }
 
-p {
-  text-align: center;
-}
-
-a {
-  color: #F7A253;
-}
-
-a:hover, a:focus, a:active{
-  color: #F75353;
-}
+/******************/
+/* Torrent Infos  */
+/******************/
 
 input[name=url]{
   text-align: center;
