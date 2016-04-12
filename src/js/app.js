@@ -14,6 +14,8 @@ function getHash(){
   var hash = window.location.hash.substring(1);
   if(hash.length > 0){
     console.log("New Hash: "+hash)
+    var holder = $('.holder');
+    holder.css('background','no-repeat center url("src/css/dashinfinity.gif")');
     download(hash);
   }
 }
@@ -102,8 +104,6 @@ function download(hash){
 
 // Callback on torrent finish
 function onTorrentDownload(torrent){
-  var holder = $('.holder');
-  holder.css('background','no-repeat center url("src/css/dashinfinity.gif")');
 
   console.log("Downloadind "+torrent.name)
 
