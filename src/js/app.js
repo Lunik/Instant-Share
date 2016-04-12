@@ -149,7 +149,6 @@ function appendHolder(torrent){
   holder.text('')
   torrent.files.forEach(function(file){
     file.getBlobURL(function (err, url) {
-      holder.click(function(){ window.open(url,'_blank')})
       showDownloadButton(file.name, url)
       showInputUrl(document.location.hostname+"/#"+torrent.infoHash)
       file.appendTo('.holder')
