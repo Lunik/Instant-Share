@@ -8,8 +8,9 @@ Look like [Instant.io](http://instant.io) but in open source and very simple !
 This is the only HTML / JS version of [Instant-Share](https://github.com/Lunik/Instant-share).
 
   `$ git clone https://github.com/Lunik/Instant-share`  
-  `$ npm install`   
-  `$ npm start`
+
+Upload Instant-Share to your favorite hosting plan.
+That's all :)
 
 ### How to share a file ?
 Simply drop it into the page and the browser will seed your file. Share the link with your friend and the download begin.
