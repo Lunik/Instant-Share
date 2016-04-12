@@ -1,108 +1,110 @@
 body {
-  font: normal 16px/20px "Helvetica Neue", Helvetica, sans-serif;
-  background: #111;
-  margin: 0;
-  padding: 0;
-  color: #fff;
+    font: normal 16px/20px "Helvetica Neue", Helvetica, sans-serif;
+    background: #111;
+    margin: 0;
+    padding: 0;
+    color: #fff;
 }
-
 p {
-  text-align: center;
+    text-align: center;
 }
-
 a {
-  color: #F7A253;
+    color: #F7A253;
+}
+a:hover, a:focus, a:active {
+    color: #F75353;
 }
 
-a:hover, a:focus, a:active{
-  color: #F75353;
-}
 /***********/
+
+
 /* Wrapper */
+
+
 /***********/
 
 .wrapper {
-  width: 500px;
-  margin: 0 auto;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  padding-bottom: 76px;
-
-  text-align: center;
+    width: 500px;
+    margin: 0 auto;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    padding-bottom: 76px;
+    text-align: center;
 }
 
 /***********/
+
+
 /*  Status */
+
+
 /***********/
+
 .status {
-  padding: 5px;
-  background: #ccc;
+    padding: 5px;
+    background: #ccc;
 }
-
 .status#fail, .status#offline {
-  background: #F75353;
+    background: #F75353;
 }
-
 .status#success, .status#online {
-  background: #27AE60;
+    background: #27AE60;
 }
 
 /***********/
+
+
 /* Holder  */
+
+
 /***********/
+
 .holder {
     border: 10px dashed #ccc;
     width: 400px;
     height: 400px;
     margin: 20px auto;
-
     cursor: pointer;
-
     overflow: hidden;
 }
-
-.holder#hover{
-  border: 10px dashed red;
+.holder#hover {
+    border: 10px dashed red;
+}
+.holder * {
+    width: 100%;
+    height: 100%;
+}
+.holder .upload-but {
+    display: none;
+}
+.holder .upload {
+    width: auto;
+    height: auto;
+    margin-top: 45%;
+    vertical-align: middle;
+    text-align: center;
+}
+.holder .upload .button {
+    font-size: 80px;
 }
 
-.holder *{
-  width: 100%;
-  height: 100%;
-}
-
-.holder .upload-but{
-  display: none;
-}
-
-.holder .upload{
-  width: auto;
-  height: auto;
-
-  margin-top: 45%;
-
-  vertical-align: middle;
-  text-align: center;
-}
-
-.holder .upload .button{
-  font-size: 80px;
-}
 /******************/
+
+
 /* Torrent Infos  */
+
+
 /******************/
 
-input[name=url]{
-  text-align: center;
-  width: 400px;
-  height: 15px;
-
-  padding: 5px;
-
-  border: 1px solid grey;
-  border-radius: 5px;
+input[name=url] {
+    text-align: center;
+    width: 400px;
+    height: 15px;
+    padding: 5px;
+    border: 1px solid grey;
+    border-radius: 5px;
 }
-
-.peer{
-  padding: 10px;
+.peer {
+    padding: 10px;
 }
