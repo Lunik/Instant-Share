@@ -1,12 +1,15 @@
+// Get Hash on hashchange
 $(window).bind('hashchange', function(){
   getHash()
 })
 
+// Get Hash on loading page
 $(document).ready(function(){
   initSeed()
   getHash()
 })
 
+// Get the hash and start torrent if there is an hash
 function getHash(){
   var hash = window.location.hash.substring(1);
   if(hash.length > 0){
@@ -15,6 +18,7 @@ function getHash(){
   }
 }
 
+// Initialise event on torrent
 function initTorrent(torrent){
   var holder = document.getElementsByClassName('holder')[0];
   torrent.on('done', function(){
@@ -28,6 +32,7 @@ function initTorrent(torrent){
   })
 }
 
+// Download a torrent
 function download(hash){
   cleanBody()
   var client = new WebTorrent()
@@ -40,6 +45,7 @@ function download(hash){
   }, onTorrentDownload)
 }
 
+// Callback on torrent finish
 function onTorrentDownload(torrent){
   var holder = document.getElementsByClassName('holder')[0];
   holder.style.background =  'no-repeat center url("src/css/dashinfinity.gif")';
@@ -50,10 +56,12 @@ function onTorrentDownload(torrent){
   appendHolder(torrent)
 }
 
+//Clean holder body
 function cleanBody(){
-  $('.download').html('')
+  $('.holder').html('')
 }
 
+// Initialise seed torrent
 function initSeed(){
   var holder = document.getElementsByClassName('holder')[0];
   var state = document.getElementsByClassName('status')[0];
@@ -80,6 +88,7 @@ function initSeed(){
   };
 }
 
+// Callback function when torrent is seeding
 function onTorrentSeed(torrent){
   window.location.hash = "#"+torrent.infoHash
   var holder = document.getElementsByClassName('holder')[0];
@@ -93,11 +102,13 @@ function onTorrentSeed(torrent){
   prompt('Partager le lien:',document.location.hostname+"/#"+torrent.infoHash)
 }
 
+// Show the input with the current url
 function showInputUrl(url){
   document.getElementsByClassName('url-input')[0].value = url;
   document.getElementsByClassName('url-input')[0].hidden = false
 }
 
+// Show the download button for downloading the file
 function showDownloadButton(fileName, url){
   var but = document.getElementsByClassName('download-url')[0]
   but.innerHTML = "Télécharger "+fileName
@@ -105,6 +116,7 @@ function showDownloadButton(fileName, url){
   but.download = fileName
 }
 
+// append a torrent to the holder
 function appendHolder(torrent){
   var holder = document.getElementsByClassName('holder')[0];
   holder.innerHTML = ""
@@ -118,6 +130,7 @@ function appendHolder(torrent){
   })
 }
 
+// Update value of peer
 function updatePeer(peerNum){
   var peer = document.getElementsByClassName('peer')[0]
   peer.innerHTML = "Peers: "+peerNum;
