@@ -39,10 +39,15 @@ function initHolder(){
 
     var file = e.dataTransfer.files[0]
 
-    console.log(file);
-    var client = new WebTorrent()
-    client.seed(file,onTorrentSeed);
+    seed(file)
   };
+}
+
+
+function seed(file){
+  console.log(file);
+  var client = new WebTorrent()
+  client.seed(file,onTorrentSeed);
 }
 
 // Initialise event on torrent
@@ -90,7 +95,6 @@ function cleanBody(){
 
 // Callback function when torrent is seeding
 function onTorrentSeed(torrent){
-  window.location.hash = "#"+torrent.infoHash
   var holder = document.getElementsByClassName('holder')[0];
   console.log("Seeding "+torrent.name)
   console.log("Hash: "+torrent.infoHash)
