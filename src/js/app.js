@@ -21,6 +21,9 @@ function getHash(){
 // Initialise seed torrent
 function initHolder(){
   var holder = document.getElementsByClassName('holder')[0];
+  var upload = document.getElementsByClassName('upload')[0];
+  var file_name = document.getElementsByClassName('filename')[0]
+  var upload_but = document.getElementsByClassName('upload-but')[0];
   var state = document.getElementsByClassName('status')[0];
 
   if (typeof window.FileReader === 'undefined') {
@@ -41,6 +44,15 @@ function initHolder(){
 
     seed(file)
   };
+
+  upload.onclick = function(){
+    upload_but.click()
+  }
+
+  upload_but.onchange = function(e){
+    file_name.innerHTML = this.files[0].name
+    seed(this.files[0]);
+  }
 }
 
 
