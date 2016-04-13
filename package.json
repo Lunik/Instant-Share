@@ -7,12 +7,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lunik/Instante-Share-Web.git"
+    "url": "git+https://github.com/Lunik/Instant-Share.git"
   },
   "author": "lunik <guillaume.lunik@gmail.com> (http://lunik.xyz)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Lunik/Instante-Share-Web/issues"
+    "url": "https://github.com/Lunik/Instant-Share/issues"
   },
-  "homepage": "https://github.com/Lunik/Instante-Share-Web#readme"
+  "homepage": "https://github.com/Lunik/Instant-Share#readme"
 }
