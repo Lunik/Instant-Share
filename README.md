@@ -1,12 +1,11 @@
 # Instant-Share
 Share your file with your friend trough torrent with WebTorrent and WEBRTC.
 
-Look like [Instant.io](http://instant.io) but in open source and very simple !
+Look like [Instant.io](http://instant.io) but in more intuitive and very lite!
 
 ### [DEMO](http://fs.lunik.xyz)
 
 ### How to install ?
-This is the only HTML / JS version of [Instant-Share](https://github.com/Lunik/Instant-share).
 
   `$ git clone https://github.com/Lunik/Instant-share`  
 
