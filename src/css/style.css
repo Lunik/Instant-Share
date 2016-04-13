@@ -5,9 +5,7 @@ body {
     padding: 0;
     color: #fff;
 }
-p {
-    text-align: center;
-}
+
 a {
     color: #F7A253;
 }
@@ -107,4 +105,17 @@ input[name=url] {
 }
 .peer {
     padding: 10px;
+}
+
+/***********/
+
+
+/* Footer  */
+
+
+/***********/
+.footer{
+  position: fixed;
+  bottom: 0px;
+  left: 16px;
 }
