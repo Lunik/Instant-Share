@@ -15,8 +15,8 @@ function getHash () {
   hash = cleanHash(hash)
   if (hash.length > 0) {
     console.log('New Hash: ' + hash)
-    var holder = $('.holder')
-    holder.css('background', 'no-repeat center url("src/css/dashinfinity.gif")')
+    var $holder = $('.holder')
+    $holder.css('background', 'no-repeat center url("src/css/dashinfinity.gif")')
     download(hash)
   }
 }
@@ -31,33 +31,33 @@ function cleanHash (hash) {
 
 // Initialise seed torrent
 function initHolder () {
-  var holder = $('.holder')
-  var upload = $('.holder .upload .button')
-  var file_name = $('.holder .filename')
-  var upload_but = $('.holder .upload-but')
-  var state = $('.status')
+  var $holder = $('.holder')
+  var $upload = $('.holder .upload .button')
+  var $file_name = $('.holder .filename')
+  var $upload_but = $('.holder .upload-but')
+  var $state = $('.status')
 
   if (typeof window.FileReader === 'undefined') {
-    state.attr('id', 'fail')
-    state.text('Instant Share indisponible')
+    $state.attr('id', 'fail')
+    $state.text('Instant Share indisponible')
   } else {
-    state.attr('id', 'success')
-    state.text('Instant Share disponible')
+    $state.attr('id', 'success')
+    $state.text('Instant Share disponible')
   }
 
-  holder.on('dragover', function (event) {
+  $holder.on('dragover', function (event) {
     event.preventDefault()
     event.stopPropagation()
     this.id = 'hover'; return false
   })
 
-  holder.on('dragleave', function (event) {
+  $holder.on('dragleave', function (event) {
     event.preventDefault()
     event.stopPropagation()
     this.id = ''; return false
   })
 
-  holder.on('drop', function (event) {
+  $holder.on('drop', function (event) {
     this.id = ''
     event.preventDefault()
     event.stopPropagation()
@@ -67,12 +67,12 @@ function initHolder () {
     seed(file)
   })
 
-  upload.click(function () {
-    upload_but.trigger('click')
+  $upload.click(function () {
+    $upload_but.trigger('click')
   })
 
-  upload_but.on('change', function () {
-    file_name.text(this.files[0].name)
+  $upload_but.on('change', function () {
+    $file_name.text(this.files[0].name)
     seed(this.files[0])
   })
 }
@@ -85,10 +85,10 @@ function seed (file) {
 
 // Initialise event on torrent
 function initTorrent (torrent) {
-  var holder = $('.holder')
+  var $holder = $('.holder')
   torrent.on('done', function () {
     console.log('torrent finished downloading')
-    holder.css('background', '')
+    $holder.css('background', '')
   })
 
   torrent.on('wire', function (wire) {
@@ -97,7 +97,7 @@ function initTorrent (torrent) {
     updateUploadedData(torrent.uploaded)
   })
 
-  torrent.on('download', function(chunkSize){
+  torrent.on('download', function (chunkSize) {
     updatePeer(torrent.numPeers)
     updateUploadedData(torrent.uploaded)
   })
@@ -150,16 +150,16 @@ function showInputUrl (url) {
 
 // Show the download button for downloading the file
 function showDownloadButton (fileName, url) {
-  var but = $('.download-url')
-  but.text('Télécharger ' + fileName)
-  but.attr('href', url)
-  but.attr('download', fileName)
+  var $but = $('.download-url')
+  $but.text('Télécharger ' + fileName)
+  $but.attr('href', url)
+  $but.attr('download', fileName)
 }
 
 // append a torrent to the holder
 function appendHolder (torrent) {
-  var holder = $('.holder')
-  holder.text('')
+  var $holder = $('.holder')
+  $holder.text('')
   torrent.files.forEach(function (file) {
     file.getBlobURL(function (err, url) {
       showDownloadButton(file.name, url)
@@ -170,7 +170,7 @@ function appendHolder (torrent) {
 }
 
 // bytes to formated data
-function formatData(bytes) {
+function formatData (bytes) {
   var sizes = ['b', 'kb', 'mb', 'gb', 'tb']
   if (bytes == 0) return '0 b'
   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
@@ -179,12 +179,12 @@ function formatData(bytes) {
 
 // Update value of peer
 function updatePeer (peerNum) {
-  var peer = $('.torrent-infos .peer')
-  peer.text('Peers: ' + peerNum)
+  var $peer = $('.torrent-infos .peer')
+  $peer.text('Peers: ' + peerNum)
 }
 
 // update the value of downloaded bytes
-function updateUploadedData(bytes){
-  var data = $('.torrent-infos .uploaded-data')
-  data.text('Uploaded: '+formatData(bytes));
+function updateUploadedData (bytes) {
+  var $data = $('.torrent-infos .uploaded-data')
+  $data.text('Uploaded: ' + formatData(bytes))
 }
