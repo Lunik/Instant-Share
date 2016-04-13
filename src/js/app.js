@@ -94,6 +94,12 @@ function initTorrent (torrent) {
   torrent.on('wire', function (wire) {
     console.log('new peer')
     updatePeer(torrent.numPeers)
+    updateUploadedData(torrent.uploaded)
+  })
+
+  torrent.on('download', function(chunkSize){
+    updatePeer(torrent.numPeers)
+    updateUploadedData(torrent.uploaded)
   })
 }
 
@@ -163,8 +169,22 @@ function appendHolder (torrent) {
   })
 }
 
+// bytes to formated data
+function formatData(bytes) {
+  var sizes = ['b', 'kb', 'mb', 'gb', 'tb']
+  if (bytes == 0) return '0 b'
+  var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
+  return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
+}
+
 // Update value of peer
 function updatePeer (peerNum) {
-  var peer = $('.peer')
+  var peer = $('.torrent-infos .peer')
   peer.text('Peers: ' + peerNum)
+}
+
+// update the value of downloaded bytes
+function updateUploadedData(bytes){
+  var data = $('.torrent-infos .uploaded-data')
+  data.text('Uploaded: '+formatData(bytes));
 }
