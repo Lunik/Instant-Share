@@ -95,6 +95,10 @@ a:hover, a:focus, a:active {
 
 /******************/
 
+.torrent-infos *{
+  display: inline-block;
+}
+
 input[name=url] {
     text-align: center;
     width: 400px;
