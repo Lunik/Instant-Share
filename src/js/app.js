@@ -12,12 +12,22 @@ $(document).ready(function () {
 // Get the hash and start torrent if there is an hash
 function getHash () {
   var hash = window.location.hash.substring(1)
+  hash = cleanHash(hash)
+  window.location.hash = '#' + hash
   if (hash.length > 0) {
     console.log('New Hash: ' + hash)
     var holder = $('.holder')
     holder.css('background', 'no-repeat center url("src/css/dashinfinity.gif")')
     download(hash)
   }
+}
+
+// turn magnet into hash
+function cleanHash (hash) {
+  var r = new RegExp('.*:')
+  var r2 = new RegExp('&.*')
+
+  return hash.replace(r, '').replace(r2, '')
 }
 
 // Initialise seed torrent
