@@ -122,4 +122,10 @@ input[name=url] {
   position: fixed;
   bottom: 0px;
   left: 16px;
+
+  font-size: 12px;
+}
+
+.footer p{
+  margin: 0px;
 }
