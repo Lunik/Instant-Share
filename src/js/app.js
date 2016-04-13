@@ -13,7 +13,6 @@ $(document).ready(function () {
 function getHash () {
   var hash = window.location.hash.substring(1)
   hash = cleanHash(hash)
-  window.location.hash = '#' + hash
   if (hash.length > 0) {
     console.log('New Hash: ' + hash)
     var holder = $('.holder')
