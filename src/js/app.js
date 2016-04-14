@@ -188,7 +188,7 @@ function updatePeer (peerNum) {
 // update the value of downloaded bytes
 function updateData (upBytes,downBytes) {
   var $upData = $('.torrent-infos .uploaded-data')
-  $upData.text('Uploaded: ' + formatData(downBytes))
+  $upData.text('Uploaded: ' + formatData(upBytes))
   var $downData = $('.torrent-infos .downloaded-data')
-  $downData.text('Downloaded: '+ formatData(upBytes))
+  $downData.text('Downloaded: '+ formatData(downBytes))
 }
