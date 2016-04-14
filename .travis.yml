@@ -1,14 +1,8 @@
-language: node_js
-node_js:
-  - "5"
-  - "5.1"
-  - "4"
-  - "4.2"
-  - "4.1"
-  - "4.0"
-  - "0.12"
-  - "0.11"
-  - "0.10"
-  - "0.8"
-  - "0.6"
-  - "iojs"
+eploy:
+  provider: npm
+  email: guillaume.lunik@gmail.com
+  api_key:
+    secure: g/+JN0tcF1zpgWUhGjzYXXZVPcQEU19g6CLJzubS/bGBTsYM8dI7Q8wvJIey/T6+4L8UUPCMBk+tQIevCPF5t9zdGLE6FbWkRBcpg5Jumaf2d/84zgF6JBo38gXX8L5M/MVYxgZZhM8UjS5hYIQCfx+i0swZN2phEWOx9tkuF4ritKtWRjX0YCMQ456ovyc2A7vI5fgsO75/KMthC80o0EN0HRgzgjeqWhgMVXEww3BzTBdgEfjCePue6oqU7XRhqBa1ZcTTwQzewUZIs4TuEEqLVBekr4B2ZMAveVl4q3Xx/uOVIeAyil5YY6u/YXarGAq3ONFpcR4r6B2WP7vRrTUr6gO9sqlvDXLqJ6D/L2ivTrSrKSJbK0szvIMtZnnC0Kb/5i4Ulgm9+Z4l6chf2cGwxhbQEnhcduM4T5ot0HnFOeZdtmF8I9ONAeAFbyRf3zh1357ij9Hi9iJLtLiJFTDdD3aGCKqI070Wv087vtrM/0LO3Pa+pcUbFQEwf8quUUYJFcpnTBj7gdFyGsFMApBuSkqfus7zJhrIuaaVLzYYyX4jI3B4LhUmbivOmXVjsWk9ozFVsaS0+A3wt5GBzjjIGuNs5Hnb8acKV/xo3ehn/U8aYPBxQo24ITEL7GeQOQBTdjWnU+s5B36AhbRXSTnFUOpPWeBuX/pjbkzjCwA=
+  on:
+    tags: true
+    repo: Lunik/Instant-Share
