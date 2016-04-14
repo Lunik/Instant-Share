@@ -3,7 +3,7 @@
   "version": "1.1.11",
   "description": "Share file directly to your friends",
   "scripts": {
-    "test": "echo Test ok;"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
