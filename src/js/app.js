@@ -97,11 +97,11 @@ function initTorrent (torrent) {
   })
 
   torrent.on('download', function (chunkSize) {
-    updatePeer(torrent.numPeers)
+    updateData(torrent.uploaded, torrent.downloaded)
   })
 
   torrent.on('upload', function (data) {
-    updateUploadedData(torrent.uploaded)
+    updateData(torrent.uploaded, torrent.downloaded)
   })
 }
 
@@ -186,7 +186,9 @@ function updatePeer (peerNum) {
 }
 
 // update the value of downloaded bytes
-function updateUploadedData (bytes) {
-  var $data = $('.torrent-infos .uploaded-data')
-  $data.text('Uploaded: ' + formatData(bytes))
+function updateData (upBytes,downBytes) {
+  var $upData = $('.torrent-infos .uploaded-data')
+  $upData.text('Uploaded: ' + formatData(downBytes))
+  var $downData = $('.torrent-infos .downloaded-data')
+  $downData.text('Downloaded: '+ formatData(upBytes))
 }
