@@ -94,11 +94,13 @@ function initTorrent (torrent) {
   torrent.on('wire', function (wire) {
     console.log('new peer')
     updatePeer(torrent.numPeers)
-    updateUploadedData(torrent.uploaded)
   })
 
   torrent.on('download', function (chunkSize) {
     updatePeer(torrent.numPeers)
+  })
+
+  torrent.on('upload', function (data) {
     updateUploadedData(torrent.uploaded)
   })
 }
