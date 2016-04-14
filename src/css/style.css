@@ -107,10 +107,17 @@ input[name=url] {
     border: 1px solid grey;
     border-radius: 5px;
 }
-.peer {
+.torrent-infos .peer {
     padding: 10px;
 }
 
+.torrent-infos .uploaded-data span{
+  color: #F75353;
+}
+
+.torrent-infos .downloaded-data span{
+  color: #32C8DE;
+}
 /***********/
 
 
