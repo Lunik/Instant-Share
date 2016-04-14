@@ -163,10 +163,10 @@ function appendHolder (torrent) {
   var $holder = $('.holder')
   $holder.text('')
   torrent.files.forEach(function (file) {
+    file.appendTo('.holder')
     file.getBlobURL(function (err, url) {
       showDownloadButton(file.name, url)
       showInputUrl(document.location.hostname + '/#' + torrent.infoHash)
-      file.appendTo('.holder')
     })
   })
 }
