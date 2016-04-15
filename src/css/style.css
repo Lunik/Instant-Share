@@ -63,7 +63,6 @@ a:hover, a:focus, a:active {
     width: 400px;
     height: 400px;
     margin: 20px auto;
-    cursor: pointer;
     overflow: hidden;
 }
 .holder#hover {
@@ -79,12 +78,14 @@ a:hover, a:focus, a:active {
 .holder .upload {
     width: auto;
     height: auto;
-    margin-top: 45%;
     vertical-align: middle;
     text-align: center;
+    cursor: pointer;
 }
 .holder .upload .button {
+    padding: 175px 0px 175px 0px;
     font-size: 80px;
+    margin: 0px;
 }
 
 /******************/
