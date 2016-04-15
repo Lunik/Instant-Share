@@ -142,6 +142,9 @@ function onTorrentSeed (torrent) {
   appendHolder(torrent)
 
   prompt('Partager le lien:', document.location.hostname + '/#' + torrent.infoHash)
+  $(window).bind('beforeunload', function(){
+    return 'Vous êtes en train de partager un fichier.';
+  });
 }
 
 // Show the input with the current url
