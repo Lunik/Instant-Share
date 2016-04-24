@@ -109,7 +109,7 @@ function initTorrent (torrent) {
 function download (hash) {
   cleanBody()
   var client = new WebTorrent()
-  client.download({
+  client.add({
     infoHash: hash,
     announce: ['wss://tracker.btorrent.xyz',
       'wss://tracker.fastcast.nz',
