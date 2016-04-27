@@ -16,6 +16,6 @@
   },
   "homepage": "https://github.com/Lunik/Instant-Share#readme",
   "dependencies": {
-    "webtorrent": "^0.91.1"
+    "webtorrent": "^0.90.0"
   }
 }
