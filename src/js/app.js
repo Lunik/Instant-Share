@@ -33,8 +33,8 @@ function cleanHash (hash) {
 function initHolder () {
   var $holder = $('.holder')
   var $upload = $('.holder .upload .button')
-  var $file_name = $('.holder .filename')
-  var $upload_but = $('.holder .upload-but')
+  var $fileName = $('.holder .filename')
+  var $uploadBut = $('.holder .upload-but')
   var $state = $('.status')
 
   if (typeof window.FileReader === 'undefined') {
@@ -68,11 +68,11 @@ function initHolder () {
   })
 
   $upload.click(function () {
-    $upload_but.trigger('click')
+    $uploadBut.trigger('click')
   })
 
-  $upload_but.on('change', function () {
-    $file_name.text(this.files[0].name)
+  $uploadBut.on('change', function () {
+    $fileName.text(this.files[0].name)
     seed(this.files[0])
   })
 }
