@@ -104,10 +104,10 @@ function initTorrent (torrent) {
     updateData(torrent.uploaded, torrent.downloaded)
   })
 
-  torrent.on('noPeers', function(){
+  torrent.on('noPeers', function () {
     console.log('no peers')
     torrent.destroy()
-    window.location = "#"
+    window.location = '#'
   })
 }
 
@@ -148,9 +148,9 @@ function onTorrentSeed (torrent) {
   appendHolder(torrent)
 
   prompt('Partager le lien:', document.location.hostname + '/#' + torrent.infoHash)
-  $(window).bind('beforeunload', function(){
-    return 'Vous êtes en train de partager un fichier.';
-  });
+  $(window).bind('beforeunload', function () {
+    return 'Vous êtes en train de partager un fichier.'
+  })
 }
 
 // Show the input with the current url
@@ -174,6 +174,9 @@ function appendHolder (torrent) {
   torrent.files.forEach(function (file) {
     file.appendTo('.holder')
     file.getBlobURL(function (err, url) {
+      if (err) {
+        console.log(err)
+      }
       showDownloadButton(file.name, url)
       showInputUrl(document.location.hostname + '/#' + torrent.infoHash)
     })
@@ -183,8 +186,8 @@ function appendHolder (torrent) {
 // bytes to formated data
 function formatData (bytes) {
   var sizes = ['b', 'kb', 'mb', 'gb', 'tb']
-  if (bytes == 0) return '0 b'
-  var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
+  if (bytes === 0) return '0 b'
+  var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
 }
 
@@ -195,7 +198,7 @@ function updatePeer (peerNum) {
 }
 
 // update the value of downloaded bytes
-function updateData (upBytes,downBytes) {
+function updateData (upBytes, downBytes) {
   var $upData = $('.torrent-infos .uploaded-data p')
   $upData.text(formatData(upBytes))
   var $downData = $('.torrent-infos .downloaded-data p')
