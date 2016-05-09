@@ -149,7 +149,7 @@ function onTorrentSeed (torrent) {
 
   prompt('Share this link:', document.location.hostname + '/#' + torrent.infoHash)
   $(window).bind('beforeunload', function () {
-    return 'You are sharing a file.'
+    return "You are still sharing a file. Are you realy sure you want to quit. You won't be this file anymore."
   })
 }
 
