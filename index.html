@@ -11,18 +11,20 @@
 
 <body>
     <div class="wrapper">
-        <p class="status" id="success">Instant share available</p>
+		<a href="/">
+        	<p class="status" id="success">Instant share</p>
+		</a>
         <div class="holder">
             <div class="upload">
                 <p class="button">+</p>
-                <p class="filename"></p>
+                <p class="filename" style="display:none"></p>
                 <input type="file" class="upload-but">
             </div>
         </div>
         <p>Drop a file in the box above to share it.</p>
         <a class="download-url"></a>
         <div class="torrent-infos">
-          <div class="peer"><span>&#9731;</span><p></p></div>
+          <div class="peer"><span>&#128101;</span><p></p></div>
           <div class="uploaded-data"><span>&#9650;</span> <p></p></div>
           <div class="downloaded-data"><span>&#9660;</span> <p></p></div>
         </div>
@@ -32,7 +34,7 @@
         </div>
     </div>
     <div class="footer">
-      <p><a target="_blank" href="https://github.com/steefmin/instant">Source</a></p>
+      <p><a target="_blank" href="https://github.com/steefmin/instant">Source</a> - <a href="http://instant.steefmin.xyz:8000/stats">Tracker stats</a></p>
       <p>Original work by <a target="_blank" href="https://github.com/Lunik/Instant-Share">@Lunik</a></p>
     </div>
     <script type="text/javascript" src="src/js/jquery/jquery.min.js"></script>

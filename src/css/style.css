@@ -6,12 +6,6 @@ body {
     color: #fff;
 }
 
-a {
-    color: #F7A253;
-}
-a:hover, a:focus, a:active {
-    color: #F75353;
-}
 
 /***********/
 
@@ -24,9 +18,6 @@ a:hover, a:focus, a:active {
 .wrapper {
     width: 500px;
     margin: 0 auto;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
     text-align: center;
 }
 
@@ -37,10 +28,14 @@ a:hover, a:focus, a:active {
 
 
 /***********/
-
+a{text-decoration:none;}
 .status {
+	font-weight:bold;
     padding: 5px;
     background: #ccc;
+	color: white;
+	text-decoration:none;
+	border-radius:5px;
 }
 .status#fail, .status#offline {
     background: #F75353;
@@ -63,6 +58,9 @@ a:hover, a:focus, a:active {
     height: 400px;
     margin: 20px auto;
     overflow: hidden;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
 }
 .holder#hover {
     border: 10px dashed red;
@@ -135,4 +133,12 @@ input[name=url] {
 
 .footer p{
   margin: 0px;
+}
+.footer a {
+	text-decoration:underline;
+    color: #F7A253;
+}
+.footer a:hover, a:focus, a:active {
+	text-decoration:underline;
+    color: #F75353;
 }
