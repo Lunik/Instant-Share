@@ -1,4 +1,4 @@
-# Instant-Share
+# Instant-Share [![bitHound Overall Score](https://www.bithound.io/github/steefmin/instant/badges/score.svg)](https://www.bithound.io/github/steefmin/instant)
 Share your file with your friend trough torrent with WebTorrent and WEBRTC.
 
 Look like [Instant.io](http://instant.io) but in more intuitive and very lite!
