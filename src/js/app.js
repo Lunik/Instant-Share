@@ -104,11 +104,11 @@ function initTorrent (torrent) {
     updateData(torrent.uploaded, torrent.downloaded)
   })
 
-//  torrent.on('noPeers', function () {
-//    console.log('no peers')
-//    torrent.destroy()
-//    window.location = '#'
-//  })
+  torrent.on('noPeers', function () {
+    console.log('no peers')
+    setTimeout(torrent.destroy(),5000)
+    window.location = '#'
+  })
 }
 
 // Download a torrent
