@@ -1,7 +1,7 @@
 // Get Hash on hashchange
-$(window).bind('hashchange', function () {
+$(window).bind(	'hashchange', function () {
   getHash();
-})
+});
 
 // Get Hash on loading page
 $(document).ready(function () {
