@@ -106,7 +106,7 @@ function initTorrent (torrent) {
 
   torrent.on('noPeers', function () {
     console.log('no peers')
-    torrent.destroy()
+    setTimeout(torrent.destroy(), 5000)
     window.location = '#'
   })
 }
