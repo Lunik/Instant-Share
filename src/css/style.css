@@ -24,9 +24,6 @@ a:hover, a:focus, a:active {
 .wrapper {
     width: 500px;
     margin: 0 auto;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
     text-align: center;
 }
 
@@ -41,6 +38,9 @@ a:hover, a:focus, a:active {
 .status {
     padding: 5px;
     background: #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 .status#fail, .status#offline {
     background: #F75353;
@@ -63,6 +63,9 @@ a:hover, a:focus, a:active {
     height: 400px;
     margin: 20px auto;
     overflow: hidden;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
 }
 .holder#hover {
     border: 10px dashed red;
