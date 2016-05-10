@@ -158,7 +158,7 @@ function onTorrentSeed (torrent) {
 // Show the input with the current url
 function showInputUrl (url) {
   $('.url-input').val(url)
-  $('.url-input').show()
+  $('.share-link').show()
 }
 
 // Show the download button for downloading the file
