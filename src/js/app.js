@@ -97,17 +97,17 @@ function initTorrent (torrent, mode) {
   })
 
   torrent.on('download', function (chunkSize) {
-    updateData(torrent.uploaded, torrent.downloaded)
+    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
   })
 
   torrent.on('upload', function (data) {
-    updateData(torrent.uploaded, torrent.downloaded)
+    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed))
   })
 
   torrent.on('noPeers', function () {
     if (mode !== 'seed') {
       console.log('no peers')
-      setTimeout(torrent.destroy(), 5000)
+      setTimeout(torrent.destroy(), 30000)
       window.location = '#'
     }
   })
@@ -128,7 +128,7 @@ function download (hash) {
 
 // Callback on torrent finish
 function onTorrentDownload (torrent) {
-  console.log('Downloadind ' + torrent.name)
+  console.log('Downloading ' + torrent.name)
 
   initTorrent(torrent, 'download')
 
@@ -187,10 +187,18 @@ function appendHolder (torrent) {
 
 // bytes to formated data
 function formatData (bytes) {
-  var sizes = ['b', 'kb', 'mb', 'gb', 'tb']
-  if (bytes === 0) return '0 b'
+  var sizes = ['B', 'kB', 'mB', 'gB', 'tB']
+  if (bytes === 0) return '0 B'
   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
+}
+
+// bits to formated speed
+function formatSpeed (bits) {
+  var sizes = ['b/s', 'kb/s', 'Mb/s', 'Gb/s', 'Tb/s']
+  if (bits === 0) return '0 b/s'
+  var i = parseInt(Math.floor(Math.log(bits) / Math.log(1024)), 10)
+  return Math.round(bits / Math.pow(1024, i), 2) + ' ' + sizes[i]
 }
 
 // Update value of peer
@@ -200,9 +208,9 @@ function updatePeer (peerNum) {
 }
 
 // update the value of downloaded bytes
-function updateData (upBytes, downBytes) {
+function updateData (upBytes, downBytes, upSpeed, downSpeed) {
   var $upData = $('.torrent-infos .uploaded-data p')
-  $upData.text(formatData(upBytes))
+  $upData.text(formatData(upBytes)+" @"+formatSpeed(upSpeed))
   var $downData = $('.torrent-infos .downloaded-data p')
-  $downData.text(formatData(downBytes))
+  $downData.text(formatData(downBytes)+" @"+formatSpeed(downSpeed))
 }
