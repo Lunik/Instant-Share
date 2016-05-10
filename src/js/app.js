@@ -187,9 +187,9 @@ function appendHolder (torrent) {
 }
 
 // initialize values for torrent info
-function initInfo() {
-	updateData(0,0,0,0)
-	updatePeer(0)
+function initInfo () {
+  updateData(0, 0, 0, 0)
+  updatePeer(0)
 }
 
 // bytes to formated data
@@ -217,7 +217,7 @@ function updatePeer (peerNum) {
 // update the value of downloaded bytes
 function updateData (upBytes, downBytes, upSpeed, downSpeed) {
   var $upData = $('.torrent-infos .uploaded-data p')
-  $upData.text(formatData(upBytes)+" @"+formatSpeed(upSpeed))
+  $upData.text(formatData(upBytes) + ' @' + formatSpeed(upSpeed))
   var $downData = $('.torrent-infos .downloaded-data p')
-  $downData.text(formatData(downBytes)+" @"+formatSpeed(downSpeed))
+  $downData.text(formatData(downBytes) + ' @' + formatSpeed(downSpeed))
 }
