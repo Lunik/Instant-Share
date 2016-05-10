@@ -80,9 +80,9 @@ function seed (file) {
 	console.log(file);
 	var client = new WebTorrent();
 	//TODO: create checkboxes for DHT / Tracker / Clearnet Trackers
-	var trackers = setTrackers();
-	client.seed(file, {announce: trackers}, onTorrentSeed);
-	//client.seed(file, {announce:['ws://h.steefmin.xyz:8000']}, onTorrentSeed);
+	//var trackers = setTrackers();
+	//client.seed(file, {announce: trackers}, onTorrentSeed);
+	client.seed(file, {announce:['ws://h.steefmin.xyz:8000']}, onTorrentSeed);
 }
 
 function setTrackers (hype, clearnet) {
@@ -155,8 +155,8 @@ function download (hash) {
 	client.add({
 		infoHash: hash,
 		//TODO: create checkboxes for DHT / Tracker / Clearnet Trackers
-		announce: trackers
-		//announce: ['ws://h.steefmin.xyz:8000']
+		//announce: trackers
+		announce: ['ws://h.steefmin.xyz:8000']
 	}, onTorrentDownload);
 }
 
