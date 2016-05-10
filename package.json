@@ -1,6 +1,6 @@
 {
   "name": "instant-share",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "description": "Share file directly to your friends",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,9 +16,13 @@
   },
   "homepage": "https://github.com/Lunik/Instant-Share#readme",
   "dependencies": {
-    "webtorrent": "^0.92.0"
+    "webtorrent": "^0.93.1"
   },
-  "standard" : {
-    "globals": [ "$", "WebTorrent", "prompt" ]
+  "standard": {
+    "globals": [
+      "$",
+      "WebTorrent",
+      "prompt"
+    ]
   }
 }

@@ -84,7 +84,7 @@ function seed (file) {
 }
 
 // Initialise event on torrent
-function initTorrent (torrent) {
+function initTorrent (torrent, mode) {
   var $holder = $('.holder')
   torrent.on('done', function () {
     console.log('torrent finished downloading')
@@ -105,9 +105,11 @@ function initTorrent (torrent) {
   })
 
   torrent.on('noPeers', function () {
-    console.log('no peers')
-    torrent.destroy()
-    window.location = '#'
+    if (mode !== 'seed') {
+      console.log('no peers')
+      setTimeout(torrent.destroy(), 5000)
+      window.location = '#'
+    }
   })
 }
 
@@ -128,7 +130,7 @@ function download (hash) {
 function onTorrentDownload (torrent) {
   console.log('Downloadind ' + torrent.name)
 
-  initTorrent(torrent)
+  initTorrent(torrent, 'download')
 
   appendHolder(torrent)
 }
@@ -143,7 +145,7 @@ function onTorrentSeed (torrent) {
   console.log('Seeding ' + torrent.name)
   console.log('Hash: ' + torrent.infoHash)
 
-  initTorrent(torrent)
+  initTorrent(torrent, 'seed')
 
   appendHolder(torrent)
 
