@@ -81,7 +81,14 @@ function initHolder () {
 function seed (file) {
 	console.log(file);
 	var client = new WebTorrent();
-	client.seed(file, {announce:['ws://h.steefmin.xyz:8000']}, onTorrentSeed);
+	client.seed(file, {
+		announce:[
+			'ws://h.steefmin.xyz:8000',
+			'wss://tracker.btorrent.xyz',
+		    'wss://tracker.fastcast.nz',
+		    'wss://tracker.openwebtorrent.com',
+		    'wss://tracker.webtorrent.io'
+		]}, onTorrentSeed);
 }
 
 // Initialise event on torrent
@@ -146,8 +153,13 @@ function download (hash) {
 	var client = new WebTorrent();
 	client.add({
 		infoHash: hash,
-		announce: ['ws://h.steefmin.xyz:8000']
-	}, onTorrentDownload);
+        announce:[
+            'ws://h.steefmin.xyz:8000',
+            'wss://tracker.btorrent.xyz',
+            'wss://tracker.fastcast.nz',
+            'wss://tracker.openwebtorrent.com',
+            'wss://tracker.webtorrent.io'
+        ]}, onTorrentDownload);
 }
 
 // Callback on torrent finish
