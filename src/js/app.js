@@ -77,10 +77,31 @@ function initHolder () {
 }
 
 function seed (file) {
-  console.log(file);
-  var client = new WebTorrent();
+	console.log(file);
+	var client = new WebTorrent();
 	//TODO: create checkboxes for DHT / Tracker / Clearnet Trackers
-  client.seed(file, {announce:['ws://h.steefmin.xyz:8000']}, onTorrentSeed);
+	//var trackers = setTrackers();
+	//client.seed(file, {announce: trackers}, onTorrentSeed);
+	client.seed(file, {announce:['ws://h.steefmin.xyz:8000']}, onTorrentSeed);
+}
+
+function setTrackers (hype, clearnet) {
+	var $hypetracker = $('#hypetracker');
+	var $cleartracker = $('#cleartracker');
+	var trackers = []
+	if($hypetracker.checked){
+		trackers.push(
+						'ws://h.steefmin.xyz:8000'
+		);
+	}
+	if($cleartracker.checked){
+		trackers.push(	'wss://tracker.btorrent.xyz',
+      					'wss://tracker.fastcast.nz',
+						'wss://tracker.openwebtorrent.com',
+						'wss://tracker.webtorrent.io'
+		);
+	}
+	return trackers;
 }
 
 // Initialise event on torrent
@@ -128,13 +149,15 @@ function initTorrent (torrent, mode) {
 
 // Download a torrent
 function download (hash) {
-  cleanBody();
-  var client = new WebTorrent();
-  client.add({
-    infoHash: hash,
-	//TODO: create checkboxes for DHT / Tracker / Clearnet Trackers
-    announce: ['ws://h.steefmin.xyz:8000']
-  }, onTorrentDownload);
+	cleanBody();
+	var client = new WebTorrent();
+	//var trackers = setTrackers();
+	client.add({
+		infoHash: hash,
+		//TODO: create checkboxes for DHT / Tracker / Clearnet Trackers
+		//announce: trackers
+		announce: ['ws://h.steefmin.xyz:8000']
+	}, onTorrentDownload);
 }
 
 // Callback on torrent finish
