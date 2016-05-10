@@ -6,6 +6,7 @@ $(window).bind('hashchange', function () {
 // Get Hash on loading page
 $(document).ready(function () {
   initHolder()
+  initInfo()
   getHash()
 })
 
@@ -183,6 +184,12 @@ function appendHolder (torrent) {
       showInputUrl(document.location.hostname + '/#' + torrent.infoHash)
     })
   })
+}
+
+// initialize values for torrent info
+function initInfo() {
+	updateData(0,0,0,0)
+	updatePeer(0)
 }
 
 // bytes to formated data
