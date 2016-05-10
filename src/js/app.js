@@ -102,7 +102,7 @@ function initTorrent (torrent, mode) {
   })
 
   torrent.on('upload', function (data) {
-    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed))
+    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
   })
 
   torrent.on('noPeers', function () {
