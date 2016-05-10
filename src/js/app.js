@@ -107,7 +107,6 @@ function initTorrent (torrent, mode) {
   torrent.on('noPeers', function () {
     if (mode !== 'seed') {
       console.log('no peers')
-      setTimeout(torrent.destroy(), 5000)
       window.location = '#'
     }
   })
