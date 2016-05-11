@@ -83,7 +83,8 @@ function seed (file) {
 	var client = new WebTorrent();
 	client.seed(file, {
 		announce:[
-			'ws://h.steefmin.xyz:8000',
+			'ws://tracker.steefmin.xyz',
+			'ws://tracker.h.steefmin.xyz:8000',
 			'wss://tracker.btorrent.xyz',
 		    'wss://tracker.fastcast.nz',
 		    'wss://tracker.openwebtorrent.com',
@@ -142,7 +143,8 @@ function download (hash) {
 	client.add({
 		infoHash: hash,
         announce:[
-            'ws://h.steefmin.xyz:8000',
+            'ws://tracker.steefmin.xyz',
+			'ws://tracker.h.steefmin.xyz:8000',
             'wss://tracker.btorrent.xyz',
             'wss://tracker.fastcast.nz',
             'wss://tracker.openwebtorrent.com',
