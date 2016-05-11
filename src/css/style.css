@@ -30,6 +30,18 @@ body {
 .wrapper p {
 	font-weight: bold;
 }
+.wrapper .description p{
+	font-weight: normal;
+}
+.wrapper .description a {
+    text-decoration:underline;
+    color: #F7A253;
+}
+.wrapper .description a:hover, a:focus, a:active {
+    text-decoration:underline;
+    color: #F75353;
+}
+
 
 /***********/
 
@@ -140,6 +152,7 @@ input[name=url] {
 .torrent-infos .downloaded-data span{
   color: #32C8DE;
 }
+
 /***********/
 
 
