@@ -145,10 +145,10 @@ function download (hash) {
         announce:[
             'ws://tracker.steefmin.xyz',
 			'ws://tracker.h.steefmin.xyz:8000',
-            'wss://tracker.btorrent.xyz',
-            'wss://tracker.fastcast.nz',
-            'wss://tracker.openwebtorrent.com',
-            'wss://tracker.webtorrent.io'
+			'wss://tracker.btorrent.xyz',
+			'wss://tracker.fastcast.nz',
+			'wss://tracker.openwebtorrent.com',
+			'wss://tracker.webtorrent.io'
         ]}, onTorrentDownload);
 }
 
