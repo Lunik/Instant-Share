@@ -103,8 +103,6 @@ function initTorrent (torrent) {
 	updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed);
 	$holder.css('background', '');
 	appendHolder(torrent);
-	console.log(torrent.files);
-	seed(torrent.files);
   });
 
   torrent.on('infoHash',function () {
