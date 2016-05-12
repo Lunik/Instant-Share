@@ -95,6 +95,7 @@ function seed (file) {
 function initTorrent (torrent) {
   var $holder = $('.holder');
   var $instructions = $('.instructions');
+  var $progress = $('.torrent-infos .progress p');
 
   torrent.on('done', function () {
 	console.log('torrent finished downloading');
@@ -120,6 +121,7 @@ function initTorrent (torrent) {
   torrent.on('download', function (chunkSize) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed);
 	updatePeer(torrent.numPeers);
+	$progress.text(Math.round(torrent.progress*10000)/100 + "%");
     $instructions.text("Downloading");
   });
 
