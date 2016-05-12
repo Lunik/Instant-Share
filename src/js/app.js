@@ -103,18 +103,25 @@ function initTorrent (torrent) {
 	updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed);
 	$holder.css('background', '');
 	appendHolder(torrent);
+	console.log(torrent.files);
+	seed(torrent.files);
   });
 
   torrent.on('infoHash',function () {
+	console.log('infoHash');
     $instructions.text("Seeding");
+	$progress.text(Math.round(torrent.progress*10000)/100 + "%");
   });
 
   torrent.on('metadata', function () {
+	console.log('metadata');
     $instructions.text("Finding peers");
   });
 
   torrent.on('wire', function (wire) {
     console.log('new peer');
+	console.log(wire.type+":"+wire.peerId);
+	console.log(wire.remoteAddress+":"+wire.remotePort);
     updatePeer(torrent.numPeers);
   });
 
@@ -132,7 +139,9 @@ function initTorrent (torrent) {
   });
 
   torrent.on('noPeers', function () {
+	console.log('no peers');
     $instructions.text("Seeding");
+	$progress.text(Math.round(torrent.progress*10000)/100 + "%");
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed);
 	updatePeer(torrent.numPeers);
   });
@@ -171,6 +180,7 @@ function cleanBody () {
 function onTorrentSeed (torrent) {
   console.log('Seeding ' + torrent.name);
   console.log('Hash: ' + torrent.infoHash);
+  torrent.progress = 1;
   updatePeer(torrent.numPeers);
   initTorrent(torrent);
   appendHolder(torrent);
