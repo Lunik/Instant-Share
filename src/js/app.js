@@ -83,7 +83,6 @@ function seed (file) {
 	client.seed(file, {
 		announce:[
 			'ws://tracker.steefmin.xyz',
-			'ws://tracker.h.steefmin.xyz:8000',
 			'ws://[fc0e:528c:fc27:ce74:ca46:24d6:c9f5:90d6]:8000',
 			'wss://tracker.btorrent.xyz',
 			'wss://tracker.fastcast.nz',
@@ -154,7 +153,6 @@ function download (hash) {
 		infoHash: hash,
         announce:[
 			'ws://tracker.steefmin.xyz',
-			'ws://tracker.h.steefmin.xyz:8000',
 			'ws://[fc0e:528c:fc27:ce74:ca46:24d6:c9f5:90d6]:8000',
 			'wss://tracker.btorrent.xyz',
 			'wss://tracker.fastcast.nz',
