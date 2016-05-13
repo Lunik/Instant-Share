@@ -196,7 +196,7 @@ function appendHolder (torrent) {
   torrent.files.forEach(function (file) {
     file.appendTo('.holder', function (err) {
       if (err) {
-        console.log(err)
+        appendFileIcon(file.name.split('.')[file.name.split('.').length - 1])
       } else {
         $('.holder p').remove()
       }
@@ -209,6 +209,28 @@ function appendHolder (torrent) {
       showInputUrl(document.location.hostname + document.location.pathname + '/#' + torrent.infoHash)
     })
   })
+}
+
+function appendFileIcon(extention){
+  var $icon = $('<i>').addClass('file-icon fa fa-5x')
+  switch (extention) {
+    case 'zip':
+    case 'rar':
+    case 'tar':
+    case 'gz':
+      $icon.addClass('fa-file-archive-o')
+      break;
+
+    case 'avi':
+    case 'mkv':
+    case 'mov':
+      $icon.addClass('fa-file-video-o')
+      break;
+
+    default:
+      $icon.addClass('fa-file-o')
+  }
+  $icon.appendTo('.holder')
 }
 
 // initialize values for torrent info
