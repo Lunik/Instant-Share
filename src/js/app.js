@@ -103,6 +103,7 @@ function initTorrent (torrent, mode) {
   })
 
   torrent.on('download', function (chunkSize) {
+    $progress.text(Math.round(torrent.progress*10000)/100 + "%");
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
   })
