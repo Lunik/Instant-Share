@@ -211,7 +211,7 @@ function appendHolder (torrent) {
   })
 }
 
-function appendFileIcon(extention){
+function appendFileIcon (extention) {
   var $icon = $('<i>').addClass('file-icon fa fa-5x')
   switch (extention) {
     case 'zip':
@@ -219,13 +219,13 @@ function appendFileIcon(extention){
     case 'tar':
     case 'gz':
       $icon.addClass('fa-file-archive-o')
-      break;
+      break
 
     case 'avi':
     case 'mkv':
     case 'mov':
       $icon.addClass('fa-file-video-o')
-      break;
+      break
 
     default:
       $icon.addClass('fa-file-o')
