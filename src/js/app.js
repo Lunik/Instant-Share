@@ -88,12 +88,12 @@ function seed (file) {
 function initTorrent (torrent, mode) {
   var $holder = $('.holder')
   var $progress = $('.torrent-infos .progress p')
-  
+
   torrent.on('done', function () {
     console.log('torrent finished downloading')
     $holder.css('background', '')
     updatePeer(torrent.numPeers)
-    updateData(torrent.uploaded, torrent.downloaded, torrenr.uploadSpeed, torrent.downloadspeed)
+    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadspeed)
     appendHolder(torrent)
   })
 
@@ -103,7 +103,7 @@ function initTorrent (torrent, mode) {
   })
 
   torrent.on('download', function (chunkSize) {
-    $progress.text(Math.round(torrent.progress*10000)/100 + "%");
+    $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
   })
@@ -114,9 +114,9 @@ function initTorrent (torrent, mode) {
   })
 
   torrent.on('noPeers', function () {
-    $progress.text(Math.round(torrent.progress*10000)/100 + "%");
+    $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
-    updatePeer(torrent.numPeers)   
+    updatePeer(torrent.numPeers)
     if (mode !== 'seed') {
       console.log('no peers')
       setTimeout(torrent.destroy(), 30000)
