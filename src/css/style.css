@@ -14,7 +14,9 @@ a:hover, a:focus, a:active {
     color: #F75353;
 }
 
-
+p {
+	margin: 10px 0px 10px 0px;
+}
 /***********/
 
 
