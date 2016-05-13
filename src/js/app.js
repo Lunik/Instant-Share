@@ -18,6 +18,8 @@ function getHash () {
     console.log('New Hash: ' + hash)
     var $holder = $('.holder')
     $holder.css('background', 'no-repeat center url("src/css/dashinfinity.gif")')
+    var $instructions = $('.instructions')
+    $instructions.text('Fetching metadata')
     download(hash)
   }
 }
@@ -26,7 +28,6 @@ function getHash () {
 function cleanHash (hash) {
   var r = new RegExp('.*:')
   var r2 = new RegExp('&.*')
-
   return hash.replace(r, '').replace(r2, '')
 }
 
@@ -34,7 +35,6 @@ function cleanHash (hash) {
 function initHolder () {
   var $holder = $('.holder')
   var $upload = $('.holder .upload .button')
-  var $fileName = $('.holder .filename')
   var $uploadBut = $('.holder .upload-but')
   var $state = $('.status')
 
@@ -49,22 +49,23 @@ function initHolder () {
   $holder.on('dragover', function (event) {
     event.preventDefault()
     event.stopPropagation()
-    this.id = 'hover'; return false
+    this.id = 'hover'
+    return false
   })
 
   $holder.on('dragleave', function (event) {
     event.preventDefault()
     event.stopPropagation()
-    this.id = ''; return false
+    this.id = ''
+    return false
   })
 
   $holder.on('drop', function (event) {
     this.id = ''
     event.preventDefault()
     event.stopPropagation()
-
     var file = event.originalEvent.dataTransfer.files[0]
-
+    $holder.text(file.name)
     seed(file)
   })
 
@@ -73,7 +74,7 @@ function initHolder () {
   })
 
   $uploadBut.on('change', function () {
-    $fileName.text(this.files[0].name)
+    $holder.text(this.files[0].name)
     seed(this.files[0])
   })
 }
@@ -85,32 +86,43 @@ function seed (file) {
 }
 
 // Initialise event on torrent
-function initTorrent (torrent, mode) {
+function initTorrent (torrent) {
   var $holder = $('.holder')
+  var $instructions = $('.instructions')
+  var $progress = $('.torrent-infos .progress p')
+
   torrent.on('done', function () {
     console.log('torrent finished downloading')
+    updatePeer(torrent.numPeers)
+    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     $holder.css('background', '')
+    appendHolder(torrent)
   })
 
   torrent.on('wire', function (wire) {
-    console.log('new peer')
+    console.log('new peer: ' + wire.remoteAddress + ':' + wire.remotePort)
     updatePeer(torrent.numPeers)
   })
 
   torrent.on('download', function (chunkSize) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
+    updatePeer(torrent.numPeers)
+    $instructions.text('Downloading')
+    $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
   })
 
   torrent.on('upload', function (data) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
+    updatePeer(torrent.numPeers)
+    $instructions.text('Uploading')
   })
 
   torrent.on('noPeers', function () {
-    if (mode !== 'seed') {
-      console.log('no peers')
-      setTimeout(torrent.destroy(), 30000)
-      window.location = '#'
-    }
+    console.log('no peers')
+    $instructions.text('Seeding')
+    $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
+    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
+    updatePeer(torrent.numPeers)
   })
 }
 
@@ -120,20 +132,21 @@ function download (hash) {
   var client = new WebTorrent()
   client.add({
     infoHash: hash,
-    announce: ['wss://tracker.btorrent.xyz',
+    announce: [
+      'wss://tracker.btorrent.xyz',
       'wss://tracker.fastcast.nz',
       'wss://tracker.openwebtorrent.com',
-      'wss://tracker.webtorrent.io']
+      'wss://tracker.webtorrent.io'
+    ]
   }, onTorrentDownload)
 }
 
 // Callback on torrent finish
 function onTorrentDownload (torrent) {
   console.log('Downloading ' + torrent.name)
-
-  initTorrent(torrent, 'download')
-
+  initTorrent(torrent)
   appendHolder(torrent)
+  destroy(torrent)
 }
 
 // Clean holder body
@@ -145,14 +158,17 @@ function cleanBody () {
 function onTorrentSeed (torrent) {
   console.log('Seeding ' + torrent.name)
   console.log('Hash: ' + torrent.infoHash)
-
-  initTorrent(torrent, 'seed')
-
+  updatePeer(torrent.numPeers)
+  initTorrent(torrent)
   appendHolder(torrent)
-
   prompt('Partager le lien:', document.location.hostname + '/#' + torrent.infoHash)
-  $(window).bind('beforeunload', function () {
-    return 'Vous êtes en train de partager un fichier.'
+  destroy(torrent)
+}
+
+// Attempt to shutdown gracefully
+function destroy (torrent) {
+  window.addEventListener('beforeunload', function (e) {
+    torrent.destroy(console.log('torrent destroyed'))
   })
 }
 
@@ -173,8 +189,17 @@ function showDownloadButton (fileName, url) {
 // append a torrent to the holder
 function appendHolder (torrent) {
   var $holder = $('.holder')
-  $holder.text('')
+  var $wrapper = $('.wrapper')
   torrent.files.forEach(function (file) {
+    var size = isShowable(file.name)
+    if (size.size) {
+      $holder.text('')
+      $wrapper.css({'width': size.size.toString() + size.type})
+      if (size.type === 'px') {
+        size.size = size.size - 100
+      }
+      $holder.css({'width': size.size.toString() + size.type, 'height': size.size.toString() + size.type})
+    }
     file.appendTo('.holder')
     file.getBlobURL(function (err, url) {
       if (err) {
@@ -186,15 +211,47 @@ function appendHolder (torrent) {
   })
 }
 
+// check if file is showable by extention
+function isShowable (filename) {
+  var res = filename.split('.')
+  var size = {size: false, type: 'px'}
+  switch (res[res.length - 1]) {
+    case 'webm':
+    case 'mp4':
+      size.size = 100
+      size.type = '%'
+      break
+    case 'pdf':
+      size.size = 900
+      break
+    case 'jpg':
+    case 'jpeg':
+    case 'png':
+    case 'gif':
+    case 'tif':
+    case 'tiff':
+    case 'txt':
+    case 'svg':
+      size.size = 500
+      break
+    default:
+      size.size = false
+      break
+  }
+  return size
+}
+
 // initialize values for torrent info
 function initInfo () {
+  var $progress = $('.torrent-infos .progress p')
+  $progress.text('0%')
   updateData(0, 0, 0, 0)
   updatePeer(0)
 }
 
 // bytes to formated data
 function formatData (bytes) {
-  var sizes = ['B', 'kB', 'mB', 'gB', 'tB']
+  var sizes = ['B', 'kB', 'MB', 'GB', 'TB']
   if (bytes === 0) return '0 B'
   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
