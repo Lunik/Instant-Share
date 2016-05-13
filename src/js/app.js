@@ -226,7 +226,7 @@ function appendHolder (torrent) {
 function isShowable (filename) {
   var res = filename.split('.')
   var size = {size: false, type: 'px'}
-  switch (res[res.length-1]) {
+  switch (res[res.length - 1]) {
     case 'webm':
     case 'mp4':
       size.size = 100
@@ -234,7 +234,7 @@ function isShowable (filename) {
       break
     case 'pdf':
       size.size = 900
-      break;
+      break
     case 'jpg':
     case 'jpeg':
     case 'png':
@@ -248,7 +248,7 @@ function isShowable (filename) {
     default:
       size.size = false
       break
-	}
+  }
   return size
 }
 
