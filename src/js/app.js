@@ -18,6 +18,8 @@ function getHash () {
     console.log('New Hash: ' + hash);
     var $holder = $('.holder');
     $holder.css('background', 'no-repeat center url("src/css/dashinfinity.gif")');
+	var $instructions = $('.instructions');
+	$instructions.text("Fetching metadata");
     download(hash);
   }
 }
@@ -86,6 +88,8 @@ function seed (file) {
 function initTorrent (torrent, mode) {
   var $holder = $('.holder')
   var $progress = $('.torrent-infos .progress p')
+  var $instructions = $('.instructions');
+
 
   torrent.on('done', function () {
     console.log('torrent finished downloading')
@@ -97,6 +101,14 @@ function initTorrent (torrent, mode) {
     appendHolder(torrent)
   })
 
+  torrent.on('infoHash',function () {
+    $instructions.text("Seeding");
+  });
+
+  torrent.on('metadata', function () {
+    $instructions.text("Finding peers");
+  });
+
   torrent.on('wire', function (wire) {
     console.log('new peer: ' + wire.remoteAddress + ':' + wire.remotePort)
     updatePeer(torrent.numPeers)
@@ -106,14 +118,17 @@ function initTorrent (torrent, mode) {
     $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
+	$instructions.text("Downloading")
   })
 
   torrent.on('upload', function (data) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
+	$instructions.text("Uploading")
   })
 
   torrent.on('noPeers', function () {
+	$instructions.text("Seeding");
     $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
@@ -140,6 +155,7 @@ function onTorrentDownload (torrent) {
   console.log('Downloading ' + torrent.name);
   initTorrent(torrent);
   appendHolder(torrent);
+  destroy(torrent);
 }
 
 // Clean holder body
@@ -155,8 +171,13 @@ function onTorrentSeed (torrent) {
   initTorrent(torrent);
   appendHolder(torrent);
   prompt('Share this link:', document.location.hostname + '/#' + torrent.infoHash);
-  $(window).bind('beforeunload', function () {
-    return "You are still sharing a file. Are you realy sure you want to quit. You won't be seeding this file anymore.";
+  destroy(torrent);
+}
+
+// Attempt to shutdown gracefully
+function destroy(torrent) {
+  window.addEventListener('beforeunload', function (e) {
+	torrent.destroy(console.log('torrent destroyed'));
   });
 }
 

@@ -1,3 +1,10 @@
+@font-face{
+	font-family:'FontAwesome';
+	src:url('../fonts/fontawesome-webfont.woff2?v=4.6.0') format('woff2');
+	font-weight:normal;
+	font-style:normal;
+}
+
 body {
     font: normal 16px/20px "Helvetica Neue", Helvetica, sans-serif;
     background: #111;
@@ -20,6 +27,9 @@ body {
     margin: 0 auto;
     text-align: center;
 }
+.wrapper p {
+	font-weight: bold;
+}
 
 /***********/
 
@@ -28,10 +38,13 @@ body {
 
 
 /***********/
-a{text-decoration:none;}
+a {
+	text-decoration:none;
+}
 .status {
 	font-weight:bold;
-    padding: 5px;
+	font-size: 16pt;
+    padding: 15px;
     background: #ccc;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -96,6 +109,7 @@ a{text-decoration:none;}
 /******************/
 
 .torrent-infos *{
+  font-family: FontAwesome;
   display: inline-block;
 }
 
@@ -106,6 +120,10 @@ input[name=url] {
     padding: 5px;
     border: 1px solid grey;
     border-radius: 5px;
+}
+.torrent-infos p {
+  font-family: sans-serif;
+  font-weight: 500;
 }
 .torrent-infos .peer {
     padding: 10px;
