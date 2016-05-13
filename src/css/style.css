@@ -143,11 +143,8 @@ input[name=url] {
   font-family: sans-serif;
   font-weight: 500;
 }
-.torrent-infos .peer {
-    padding: 10px;
-}
-.torrent-infos .progress {
-	padding: 10px;
+.torrent-infos > * {
+    padding: 0px 5px 0px 5px;
 }
 .torrent-infos .uploaded-data i{
   color: #F75353;
