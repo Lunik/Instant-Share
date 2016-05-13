@@ -81,7 +81,7 @@ function initHolder () {
 function seed (file) {
   console.log(file)
   var client = new WebTorrent()
-  client.seed(file, onTorrentSeed)
+  client.seed(file, {announce:['ws://h.steefmin.xyz:8000']}, onTorrentSeed)
 }
 
 // Initialise event on torrent
@@ -91,6 +91,8 @@ function initTorrent (torrent, mode) {
 
   torrent.on('done', function () {
     console.log('torrent finished downloading')
+	updatePeer(torrent.numPeers)
+    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     $holder.css('background', '')
     updatePeer(torrent.numPeers)
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadspeed)
@@ -131,10 +133,7 @@ function download (hash) {
   var client = new WebTorrent()
   client.add({
     infoHash: hash,
-    announce: ['wss://tracker.btorrent.xyz',
-      'wss://tracker.fastcast.nz',
-      'wss://tracker.openwebtorrent.com',
-      'wss://tracker.webtorrent.io']
+    announce: ['ws://h.steefmin.xyz:8000']
   }, onTorrentDownload)
 }
 
@@ -142,7 +141,9 @@ function download (hash) {
 function onTorrentDownload (torrent) {
   console.log('Downloading ' + torrent.name)
 
-  initTorrent(torrent, 'download')
+  initTorrent(torrent)
+  
+  updatePeer(torrent.numPeers)
 
   appendHolder(torrent)
 }
@@ -157,7 +158,9 @@ function onTorrentSeed (torrent) {
   console.log('Seeding ' + torrent.name)
   console.log('Hash: ' + torrent.infoHash)
 
-  initTorrent(torrent, 'seed')
+  initTorrent(torrent)
+  
+  updatePeer(torrent.numPeers)
 
   appendHolder(torrent)
 
@@ -205,7 +208,7 @@ function initInfo () {
 
 // bytes to formated data
 function formatData (bytes) {
-  var sizes = ['B', 'kB', 'mB', 'gB', 'tB']
+  var sizes = ['B', 'kB', 'MB', 'GB', 'TB']
   if (bytes === 0) return '0 B'
   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
