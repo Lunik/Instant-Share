@@ -96,6 +96,7 @@ function initTorrent (torrent, mode) {
   var $holder = $('.holder')
   var $progress = $('.torrent-infos .progress p')
   var $instructions = $('.instructions');
+  var $progress = $('.torrent-infos .progress p');
 
 
   torrent.on('done', function () {
@@ -120,10 +121,10 @@ function initTorrent (torrent, mode) {
   })
 
   torrent.on('download', function (chunkSize) {
-    $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
 	$instructions.text("Downloading")
+	$progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
   })
 
   torrent.on('upload', function (data) {
