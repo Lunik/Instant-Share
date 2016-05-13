@@ -83,6 +83,7 @@ function initHolder () {
   })
 }
 
+// Seed a file
 function seed (file) {
   console.log(file)
   var client = new WebTorrent()
@@ -235,10 +236,12 @@ function formatSpeed (bits) {
   return Math.round(bits / Math.pow(1024, i), 2) + ' ' + sizes[i]
 }
 
+// Update progress percentage
 function updateProgress(percent){
   var $progress = $('.torrent-infos .progress p')
   $progress.text(percent+'%')
 }
+
 // Update value of peer
 function updatePeer (peerNum) {
   var $peer = $('.torrent-infos .peer p')
