@@ -6,12 +6,6 @@ body {
     color: #fff;
 }
 
-a {
-    color: #F7A253;
-}
-a:hover, a:focus, a:active {
-    color: #F75353;
-}
 
 /***********/
 
@@ -34,13 +28,16 @@ a:hover, a:focus, a:active {
 
 
 /***********/
-
+a{text-decoration:none;}
 .status {
+	font-weight:bold;
     padding: 5px;
     background: #ccc;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+	color: white;
+	text-decoration:none;
 }
 .status#fail, .status#offline {
     background: #F75353;
@@ -142,4 +139,12 @@ input[name=url] {
 
 .footer p{
   margin: 0px;
+}
+.footer a {
+	text-decoration:underline;
+    color: #F7A253;
+}
+.footer a:hover, a:focus, a:active {
+	text-decoration:underline;
+    color: #F75353;
 }

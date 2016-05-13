@@ -5,16 +5,10 @@ $(window).bind(	'hashchange', function () {
 
 // Get Hash on loading page
 $(document).ready(function () {
-<<<<<<< HEAD
   initHolder()
   initInfo()
   getHash()
 })
-=======
-  initHolder();
-  getHash();
-});
->>>>>>> added semicolons
 
 // Get the hash and start torrent if there is an hash
 function getHash () {
@@ -77,6 +71,7 @@ function initHolder () {
 
   $uploadBut.on('change', function () {
     $fileName.text(this.files[0].name);
+	$fileName.show();
     seed(this.files[0]);
   });
 }
@@ -84,6 +79,7 @@ function initHolder () {
 function seed (file) {
   console.log(file);
   var client = new WebTorrent();
+	//TODO: create checkboxes for DHT / Tracker / Clearnet Trackers
   client.seed(file, {announce:['ws://h.steefmin.xyz:8000']}, onTorrentSeed);
 }
 
@@ -136,6 +132,7 @@ function download (hash) {
   var client = new WebTorrent();
   client.add({
     infoHash: hash,
+	//TODO: create checkboxes for DHT / Tracker / Clearnet Trackers
     announce: ['ws://h.steefmin.xyz:8000']
   }, onTorrentDownload);
 }
@@ -144,7 +141,6 @@ function download (hash) {
 function onTorrentDownload (torrent) {
   console.log('Downloading ' + torrent.name);
   initTorrent(torrent);
-  updatePeer(torrent.numPeers);
   appendHolder(torrent);
 }
 
@@ -157,12 +153,12 @@ function cleanBody () {
 function onTorrentSeed (torrent) {
   console.log('Seeding ' + torrent.name);
   console.log('Hash: ' + torrent.infoHash);
-  initTorrent(torrent);
   updatePeer(torrent.numPeers);
+  initTorrent(torrent);
   appendHolder(torrent);
   prompt('Share this link:', document.location.hostname + '/#' + torrent.infoHash);
   $(window).bind('beforeunload', function () {
-    return "You are still sharing a file. Are you realy sure you want to quit. You won't be this file anymore.";
+    return "You are still sharing a file. Are you realy sure you want to quit. You won't be seeding this file anymore.";
   });
 }
 
@@ -194,6 +190,11 @@ function appendHolder (torrent) {
       showInputUrl(document.location.hostname + '/#' + torrent.infoHash);
     });
   });
+}
+// initialize values for torrent info
+function initInfo() {
+	updateData(0,0,0,0);
+	updatePeer(0);
 }
 
 // initialize values for torrent info
