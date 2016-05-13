@@ -65,7 +65,9 @@ function initHolder () {
     event.preventDefault()
     event.stopPropagation()
     var file = event.originalEvent.dataTransfer.files[0]
-    $holder.text(file.name)
+    $holder.html(
+      $('<p>').text(file.name)
+    )
     seed(file)
   })
 
@@ -74,7 +76,9 @@ function initHolder () {
   })
 
   $uploadBut.on('change', function () {
-    $holder.text(this.files[0].name)
+    $holder.html(
+      $('<p>').text(this.files[0].name)
+    )
     seed(this.files[0])
   })
 }
@@ -192,7 +196,13 @@ function appendHolder (torrent) {
   var $holder = $('.holder')
   var $wrapper = $('.wrapper')
   torrent.files.forEach(function (file) {
-    file.appendTo('.holder')
+    file.appendTo('.holder', function(err){
+      if (err) {
+        console.log(err)
+      } else {
+        $('.holder p').remove()
+      }
+    })
     file.getBlobURL(function (err, url) {
       if (err) {
         console.log(err)
