@@ -11,32 +11,34 @@
 
 <body>
     <div class="wrapper">
-        <p class="status" id="success">Instant share available</p>
+		<a class="status-link" href="/">
+        	<p class="status" id="success">Instant share</p>
+		</a>
         <div class="holder">
             <div class="upload">
                 <p class="button">+</p>
-                <p class="filename"></p>
                 <input type="file" class="upload-but">
             </div>
         </div>
+        <p class="instructions">Dépose un fichier dans la zone au dessus pour le partager.</p>
         <a class="download-url"></a>
         <div class="torrent-infos">
-          <div class="peer"><span>&#9731;</span><p></p></div>
-          <div class="uploaded-data"><span>&#9650;</span> <p></p></div>
-          <div class="downloaded-data"><span>&#9660;</span> <p></p></div>
+          <div class="progress"><span>&#61444;</span> <p></p></div>
+          <div class="peer"><span>&#61632;</span> <p></p></div>
+          <div class="uploaded-data"><span>&#61587;</span> <p></p></div>
+          <div class="downloaded-data"><span>&#61465;</span> <p></p></div>
         </div>
         <div class="share-link" style="display:none">
           <p>Lien de partage:</p>
           <input class="url-input" type="text" name="url">
         </div>
-        <p>Dépose un fichier dans la zone au dessus pour le partager.</p>
     </div>
     <div class="footer">
       <p><a target="_blank" href="https://github.com/Lunik/Instant-Share">Source</a></p>
-      <p>Powered by <a target="_blank" href="https://github.com/Lunik">@Lunik</a></p>
+      <p>Powered by <a target="_blank" href="https://github.com/Lunik">@Lunik</a> with <a target="_blank" href="http://webtorrent.io">WebTorrent</a></p>
     </div>
     <script type="text/javascript" src="src/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/webtorrent/0.93.1/webtorrent.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/webtorrent/0.93.2/webtorrent.min.js"></script>
     <script type="text/javascript" src="src/js/app.js"></script>
 </body>
 
