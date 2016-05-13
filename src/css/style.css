@@ -11,6 +11,12 @@ body {
     padding: 0;
     color: #fff;
 }
+a {
+    color: #F7A253;
+}
+a:hover, a:focus, a:active {
+    color: #F75353;
+}
 
 
 /***********/
@@ -26,11 +32,15 @@ body {
     margin: 0 auto;
     text-align: center;
 }
+.wrapper .status-link , .wrapper .status-link:hover, .wrapper .status-link:focus, .status-link .wrapper:active{
+    color: white;
+    text-decoration:none;
+}
 .wrapper p {
-	font-weight: bold;
+    font-weight: bold;
 }
 .wrapper .description p{
-	font-weight: normal;
+    font-weight: normal;
 }
 .wrapper .description a {
     text-decoration:underline;
@@ -50,19 +60,16 @@ body {
 
 /***********/
 
-a {
-	text-decoration:none;
-}
 .status {
-	font-weight:bold;
-	font-size: 16pt;
+    font-weight:bold;
+    font-size: 16pt;
     padding: 15px;
     background: #ccc;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-	color: white;
-	text-decoration:none;
+    color: white;
+    text-decoration:none;
 }
 .status#fail, .status#offline {
     background: #F75353;
@@ -170,11 +177,4 @@ input[name=url] {
 .footer p{
   margin: 0px;
 }
-.footer a {
-	text-decoration:underline;
-    color: #F7A253;
-}
-.footer a:hover, a:focus, a:active {
-	text-decoration:underline;
-    color: #F75353;
-}
+
