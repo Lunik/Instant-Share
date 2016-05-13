@@ -35,7 +35,6 @@ function cleanHash (hash) {
 function initHolder () {
   var $holder = $('.holder');
   var $upload = $('.holder .upload .button');
-  var $fileName = $('.holder .filename');
   var $uploadBut = $('.holder .upload-but');
   var $state = $('.status');
 
@@ -64,6 +63,7 @@ function initHolder () {
     event.preventDefault();
     event.stopPropagation();
     var file = event.originalEvent.dataTransfer.files[0];
+	$holder.text(file.name);
     seed(file);
   });
 
@@ -72,8 +72,7 @@ function initHolder () {
   });
 
   $uploadBut.on('change', function () {
-    $fileName.text(this.files[0].name);
-	$fileName.show();
+	$holder.text(this.files[0].name);
     seed(this.files[0]);
   });
 }
@@ -100,14 +99,12 @@ function initTorrent (torrent, mode) {
 
 
   torrent.on('done', function () {
-    console.log('torrent finished downloading')
-	updatePeer(torrent.numPeers)
-    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
-    $holder.css('background', '')
-    updatePeer(torrent.numPeers)
-    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadspeed)
-    appendHolder(torrent)
-  })
+	console.log('torrent finished downloading');
+	updatePeer(torrent.numPeers);
+	updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed);
+	$holder.css('background', '');
+	appendHolder(torrent);
+  });
 
   torrent.on('infoHash',function () {
     $instructions.text("Seeding");
@@ -212,8 +209,17 @@ function showDownloadButton (fileName, url) {
 // append a torrent to the holder
 function appendHolder (torrent) {
   var $holder = $('.holder');
-  $holder.text('');
+  var $wrapper = $('.wrapper');
   torrent.files.forEach(function (file) {
+	var size = isShowable(file.name);
+	if (size.size) {
+		$holder.text('');
+		$wrapper.css({"width": size.size.toString()+size.type});
+		if (size.type === "px") {
+			size.size = size.size - 100;
+		}
+		$holder.css({"width": size.size.toString()+size.type, "height": size.size.toString()+size.type});
+	}
     file.appendTo('.holder');
     file.getBlobURL(function (err, url) {
       if (err) {
@@ -224,6 +230,37 @@ function appendHolder (torrent) {
     });
   });
 }
+
+// check if file is showable by extention
+function isShowable(filename) {
+	var res = filename.split('.');
+	var size = {size: false, type: "px"};
+	switch (res[res.length-1]) {
+		case "webm":
+		case "mp4":
+			size.size = 100;
+			size.type = "%";
+			break;
+		case "pdf":
+			size.size = 900;
+			break;
+		case "jpg":
+		case "jpeg":
+		case "png":
+		case "gif":
+		case "tif":
+		case "tiff":
+		case "txt":
+		case "svg":
+			size.size = 500;
+			break;
+		default:
+			size.size = false;
+			break;
+	}
+	return size;
+}
+
 // initialize values for torrent info
 function initInfo() {
 	updateData(0,0,0,0);
