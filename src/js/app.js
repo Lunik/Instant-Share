@@ -166,7 +166,7 @@ function onTorrentSeed (torrent) {
   updatePeer(torrent.numPeers)
   initTorrent(torrent)
   appendHolder(torrent)
-  prompt('Partager le lien:', document.location.hostname + document.location.pathname +'/#' + torrent.infoHash)
+  prompt('Partager le lien:', document.location.hostname + document.location.pathname + '/#' + torrent.infoHash)
   destroy(torrent)
 }
 
@@ -193,10 +193,8 @@ function showDownloadButton (fileName, url) {
 
 // append a torrent to the holder
 function appendHolder (torrent) {
-  var $holder = $('.holder')
-  var $wrapper = $('.wrapper')
   torrent.files.forEach(function (file) {
-    file.appendTo('.holder', function(err){
+    file.appendTo('.holder', function (err) {
       if (err) {
         console.log(err)
       } else {
@@ -208,7 +206,7 @@ function appendHolder (torrent) {
         console.log(err)
       }
       showDownloadButton(file.name, url)
-      showInputUrl(document.location.hostname + document.location.pathname +'/#' + torrent.infoHash)
+      showInputUrl(document.location.hostname + document.location.pathname + '/#' + torrent.infoHash)
     })
   })
 }
@@ -237,9 +235,9 @@ function formatSpeed (bits) {
 }
 
 // Update progress percentage
-function updateProgress(percent){
+function updateProgress (percent) {
   var $progress = $('.torrent-infos .progress p')
-  $progress.text(percent+'%')
+  $progress.text(percent + '%')
 }
 
 // Update value of peer
