@@ -255,7 +255,7 @@ function formatSpeed (bits) {
   return Math.round(bits / Math.pow(1024, i), 2) + ' ' + sizes[i]
 }
 
-function updateFileName(name){
+function updateFileName (name) {
   var $holder = $('.holder')
   $holder.html($('<p>').text(name))
 }
