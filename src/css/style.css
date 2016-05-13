@@ -147,10 +147,10 @@ input[name=url] {
 .torrent-infos .progress {
 	padding: 10px;
 }
-.torrent-infos .uploaded-data span{
+.torrent-infos .uploaded-data i{
   color: #F75353;
 }
-.torrent-infos .downloaded-data span{
+.torrent-infos .downloaded-data i{
   color: #32C8DE;
 }
 
