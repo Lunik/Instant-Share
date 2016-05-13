@@ -87,25 +87,35 @@ function seed (file) {
 // Initialise event on torrent
 function initTorrent (torrent, mode) {
   var $holder = $('.holder')
+  var $progress = $('.torrent-infos .progress p')
+  
   torrent.on('done', function () {
     console.log('torrent finished downloading')
     $holder.css('background', '')
+    updatePeer(torrent.numPeers)
+    updateData(torrent.uploaded, torrent.downloaded, torrenr.uploadSpeed, torrent.downloadspeed)
+    appendHolder(torrent)
   })
 
   torrent.on('wire', function (wire) {
-    console.log('new peer')
+    console.log('new peer: ' + wire.remoteAddress + ':' + wire.remotePort)
     updatePeer(torrent.numPeers)
   })
 
   torrent.on('download', function (chunkSize) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
+    updatePeer(torrent.numPeers)
   })
 
   torrent.on('upload', function (data) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
+    updatePeer(torrent.numPeers)
   })
 
   torrent.on('noPeers', function () {
+    $progress.text(Math.round(torrent.progress*10000)/100 + "%");
+    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
+    updatePeer(torrent.numPeers)   
     if (mode !== 'seed') {
       console.log('no peers')
       setTimeout(torrent.destroy(), 30000)
@@ -188,6 +198,8 @@ function appendHolder (torrent) {
 
 // initialize values for torrent info
 function initInfo() {
+	var $progress = $('.torrent-infos .progress p');
+	$progress.text("0%");
 	updateData(0,0,0,0)
 	updatePeer(0)
 }
