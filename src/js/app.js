@@ -82,7 +82,11 @@ function initHolder () {
 function seed (file) {
   console.log(file)
   var client = new WebTorrent()
-  client.seed(file, onTorrentSeed)
+  client.seed(file, {
+    announce: [
+      'ws://torrent.lunik.xyz:8000'
+    ]
+  }, onTorrentSeed)
 }
 
 // Initialise event on torrent
@@ -133,10 +137,7 @@ function download (hash) {
   client.add({
     infoHash: hash,
     announce: [
-      'wss://tracker.btorrent.xyz',
-      'wss://tracker.fastcast.nz',
-      'wss://tracker.openwebtorrent.com',
-      'wss://tracker.webtorrent.io'
+      'ws://torrent.lunik.xyz:8000'
     ]
   }, onTorrentDownload)
 }
