@@ -10,6 +10,7 @@ $(document).ready(function () {
   getHash()
 })
 
+
 // Get the hash and start torrent if there is an hash
 function getHash () {
   var hash = window.location.hash.substring(1);
@@ -92,12 +93,10 @@ function seed (file) {
 }
 
 // Initialise event on torrent
-function initTorrent (torrent, mode) {
-  var $holder = $('.holder')
-  var $progress = $('.torrent-infos .progress p')
+function initTorrent (torrent) {
+  var $holder = $('.holder');
   var $instructions = $('.instructions');
   var $progress = $('.torrent-infos .progress p');
-
 
   torrent.on('done', function () {
 	console.log('torrent finished downloading');
@@ -126,25 +125,12 @@ function initTorrent (torrent, mode) {
   })
 
   torrent.on('noPeers', function () {
-<<<<<<< HEAD
-	$instructions.text("Seeding");
-    $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
-    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
-    updatePeer(torrent.numPeers)
-    if (mode !== 'seed') {
-      console.log('no peers')
-      setTimeout(torrent.destroy(), 30000)
-      window.location = '#'
-    }
-  })
-=======
 	console.log('no peers');
     $instructions.text("Seeding");
 	$progress.text(Math.round(torrent.progress*10000)/100 + "%");
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed);
 	updatePeer(torrent.numPeers);
   });
->>>>>>> report peer information and progress of seed
 }
 
 // Download a torrent
@@ -269,12 +255,6 @@ function initInfo() {
 	$progress.text("0%");
 	updateData(0,0,0,0);
 	updatePeer(0);
-}
-
-// initialize values for torrent info
-function initInfo () {
-  updateData(0, 0, 0, 0)
-  updatePeer(0)
 }
 
 // bytes to formated data
