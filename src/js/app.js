@@ -97,7 +97,6 @@ function seed (file) {
 function initTorrent (torrent) {
   var $holder = $('.holder')
   var $instructions = $('.instructions')
-  var $progress = $('.torrent-infos .progress p')
 
   torrent.on('done', function () {
     console.log('torrent finished downloading')
@@ -116,7 +115,7 @@ function initTorrent (torrent) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
     $instructions.text('Downloading')
-    $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
+    updateProgress(Math.round(torrent.progress * 100))
   })
 
   torrent.on('upload', function (data) {
@@ -128,7 +127,7 @@ function initTorrent (torrent) {
   torrent.on('noPeers', function () {
     console.log('no peers')
     $instructions.text('Seeding')
-    $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
+    updateProgress(Math.round(torrent.progress * 100))
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
   })
@@ -215,8 +214,7 @@ function appendHolder (torrent) {
 
 // initialize values for torrent info
 function initInfo () {
-  var $progress = $('.torrent-infos .progress p')
-  $progress.text('0%')
+  updateProgress(0)
   updateData(0, 0, 0, 0)
   updatePeer(0)
 }
@@ -237,6 +235,10 @@ function formatSpeed (bits) {
   return Math.round(bits / Math.pow(1024, i), 2) + ' ' + sizes[i]
 }
 
+function updateProgress(percent){
+  var $progress = $('.torrent-infos .progress p')
+  $progress.text(percent+'%')
+}
 // Update value of peer
 function updatePeer (peerNum) {
   var $peer = $('.torrent-infos .peer p')
