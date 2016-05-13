@@ -1,3 +1,9 @@
+@font-face{
+	font-family:'FontAwesome';
+	src:url('../fonts/fontawesome-webfont.woff2?v=4.6.0') format('woff2');
+	font-weight:normal;
+	font-style:normal;
+}
 body {
     font: normal 16px/20px "Helvetica Neue", Helvetica, sans-serif;
     background: #111;
@@ -6,12 +12,6 @@ body {
     color: #fff;
 }
 
-a {
-    color: #F7A253;
-}
-a:hover, a:focus, a:active {
-    color: #F75353;
-}
 
 /***********/
 
@@ -26,6 +26,21 @@ a:hover, a:focus, a:active {
     margin: 0 auto;
     text-align: center;
 }
+.wrapper p {
+	font-weight: bold;
+}
+.wrapper .description p{
+	font-weight: normal;
+}
+.wrapper .description a {
+    text-decoration:underline;
+    color: #F7A253;
+}
+.wrapper .description a:hover, a:focus, a:active {
+    text-decoration:underline;
+    color: #F75353;
+}
+
 
 /***********/
 
@@ -35,12 +50,19 @@ a:hover, a:focus, a:active {
 
 /***********/
 
+a {
+	text-decoration:none;
+}
 .status {
-    padding: 5px;
+	font-weight:bold;
+	font-size: 16pt;
+    padding: 15px;
     background: #ccc;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+	color: white;
+	text-decoration:none;
 }
 .status#fail, .status#offline {
     background: #F75353;
@@ -48,6 +70,7 @@ a:hover, a:focus, a:active {
 .status#success, .status#online {
     background: #27AE60;
 }
+
 
 /***********/
 
@@ -90,6 +113,7 @@ a:hover, a:focus, a:active {
     margin: 0px;
 }
 
+
 /******************/
 
 
@@ -99,9 +123,9 @@ a:hover, a:focus, a:active {
 /******************/
 
 .torrent-infos *{
+  font-family: FontAwesome;
   display: inline-block;
 }
-
 input[name=url] {
     text-align: center;
     width: 400px;
@@ -110,17 +134,24 @@ input[name=url] {
     border: 1px solid grey;
     border-radius: 5px;
 }
+.torrent-infos p {
+  font-family: sans-serif;
+  font-weight: 500;
+}
 .torrent-infos .peer {
     padding: 10px;
 }
-
+.torrent-infos .progress {
+	padding: 10px;
+}
 .torrent-infos .uploaded-data span{
   color: #F75353;
 }
-
 .torrent-infos .downloaded-data span{
   color: #32C8DE;
 }
+
+
 /***********/
 
 
@@ -128,6 +159,7 @@ input[name=url] {
 
 
 /***********/
+
 .footer{
   position: fixed;
   bottom: 0px;
@@ -135,7 +167,14 @@ input[name=url] {
 
   font-size: 12px;
 }
-
 .footer p{
   margin: 0px;
+}
+.footer a {
+	text-decoration:underline;
+    color: #F7A253;
+}
+.footer a:hover, a:focus, a:active {
+	text-decoration:underline;
+    color: #F75353;
 }
