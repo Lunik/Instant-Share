@@ -65,9 +65,7 @@ function initHolder () {
     event.preventDefault()
     event.stopPropagation()
     var file = event.originalEvent.dataTransfer.files[0]
-    $holder.html(
-      $('<p>').text(file.name)
-    )
+    updateFileName(file.name)
     seed(file)
   })
 
@@ -76,9 +74,7 @@ function initHolder () {
   })
 
   $uploadBut.on('change', function () {
-    $holder.html(
-      $('<p>').text(this.files[0].name)
-    )
+    updateFileName(this.files[0].name)
     seed(this.files[0])
   })
 }
@@ -117,6 +113,7 @@ function initTorrent (torrent) {
     updatePeer(torrent.numPeers)
     $instructions.text('Downloading')
     updateProgress(Math.round(torrent.progress * 100))
+    updateFileName(torrent.name)
   })
 
   torrent.on('upload', function (data) {
@@ -212,25 +209,27 @@ function appendHolder (torrent) {
 }
 
 function appendFileIcon (extention) {
-  var $icon = $('<i>').addClass('file-icon fa fa-5x')
-  switch (extention) {
-    case 'zip':
-    case 'rar':
-    case 'tar':
-    case 'gz':
-      $icon.addClass('fa-file-archive-o')
-      break
+  if ($('.file-icon').length <= 0) {
+    var $icon = $('<i>').addClass('file-icon fa fa-5x')
+    switch (extention) {
+      case 'zip':
+      case 'rar':
+      case 'tar':
+      case 'gz':
+        $icon.addClass('fa-file-archive-o')
+        break
 
-    case 'avi':
-    case 'mkv':
-    case 'mov':
-      $icon.addClass('fa-file-video-o')
-      break
+      case 'avi':
+      case 'mkv':
+      case 'mov':
+        $icon.addClass('fa-file-video-o')
+        break
 
-    default:
-      $icon.addClass('fa-file-o')
+      default:
+        $icon.addClass('fa-file-o')
+    }
+    $icon.appendTo('.holder')
   }
-  $icon.appendTo('.holder')
 }
 
 // initialize values for torrent info
@@ -256,6 +255,10 @@ function formatSpeed (bits) {
   return Math.round(bits / Math.pow(1024, i), 2) + ' ' + sizes[i]
 }
 
+function updateFileName(name){
+  var $holder = $('.holder')
+  $holder.html($('<p>').text(name))
+}
 // Update progress percentage
 function updateProgress (percent) {
   var $progress = $('.torrent-infos .progress p')
