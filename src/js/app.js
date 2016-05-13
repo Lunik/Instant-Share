@@ -10,7 +10,6 @@ $(document).ready(function () {
   getHash()
 })
 
-
 // Get the hash and start torrent if there is an hash
 function getHash () {
   var hash = window.location.hash.substring(1)
@@ -19,8 +18,8 @@ function getHash () {
     console.log('New Hash: ' + hash)
     var $holder = $('.holder')
     $holder.css('background', 'no-repeat center url("src/css/dashinfinity.gif")')
-	var $instructions = $('.instructions')
-	$instructions.text("Fetching metadata")
+    var $instructions = $('.instructions')
+    $instructions.text("Fetching metadata")
     download(hash)
   }
 }
@@ -50,13 +49,15 @@ function initHolder () {
   $holder.on('dragover', function (event) {
     event.preventDefault()
     event.stopPropagation()
-    this.id = 'hover'; return false;
+    this.id = 'hover'
+    return false
   })
 
   $holder.on('dragleave', function (event) {
     event.preventDefault()
     event.stopPropagation()
-    this.id = ''; return false;
+    this.id = '' 
+    return false
   })
 
   $holder.on('drop', function (event) {
@@ -64,7 +65,7 @@ function initHolder () {
     event.preventDefault()
     event.stopPropagation()
     var file = event.originalEvent.dataTransfer.files[0]
-	$holder.text(file.name)
+    $holder.text(file.name)
     seed(file)
   })
 
@@ -73,7 +74,7 @@ function initHolder () {
   })
 
   $uploadBut.on('change', function () {
-	$holder.text(this.files[0].name)
+    $holder.text(this.files[0].name)
     seed(this.files[0])
   })
 }
@@ -81,15 +82,16 @@ function initHolder () {
 function seed (file) {
 	console.log(file)
 	var client = new WebTorrent()
-	client.seed(file, {
-		announce:[
-			'ws://tracker.steefmin.xyz',
-			'ws://[fc0e:528c:fc27:ce74:ca46:24d6:c9f5:90d6]:8000',
-			'wss://tracker.btorrent.xyz',
-			'wss://tracker.fastcast.nz',
-			'wss://tracker.openwebtorrent.com',
-			'wss://tracker.webtorrent.io'
-		]}, onTorrentSeed)
+  client.seed(file, {
+    announce: [
+      'ws://tracker.steefmin.xyz',
+      'ws://[fc0e:528c:fc27:ce74:ca46:24d6:c9f5:90d6]:8000',
+      'wss://tracker.btorrent.xyz',
+      'wss://tracker.fastcast.nz',
+      'wss://tracker.openwebtorrent.com',
+      'wss://tracker.webtorrent.io'
+    ]
+  }, onTorrentSeed)
 }
 
 // Initialise event on torrent
@@ -104,7 +106,7 @@ function initTorrent (torrent) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     $holder.css('background', '')
     appendHolder(torrent)
-  });
+  })
 
   torrent.on('wire', function (wire) {
     console.log('new peer: ' + wire.remoteAddress + ':' + wire.remotePort)
@@ -114,38 +116,38 @@ function initTorrent (torrent) {
   torrent.on('download', function (chunkSize) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
-    $instructions.text("Downloading")
+    $instructions.text('Downloading')
     $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
   })
 
   torrent.on('upload', function (data) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
-    $instructions.text("Uploading")
+    $instructions.text('Uploading')
   })
 
   torrent.on('noPeers', function () {
     console.log('no peers')
-    $instructions.text("Seeding")
-    $progress.text(Math.round(torrent.progress*10000)/100 + "%")
+    $instructions.text('Seeding')
+    $progress.text(Math.round(torrent.progress * 10000) / 100 + '%')
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
-  });
+  })
 }
 
 // Download a torrent
 function download (hash) {
-	cleanBody()
-	var client = new WebTorrent()
-	client.add({
-		infoHash: hash,
-    announce:[
-			'ws://tracker.steefmin.xyz',
-			'ws://[fc0e:528c:fc27:ce74:ca46:24d6:c9f5:90d6]:8000',
-			'wss://tracker.btorrent.xyz',
-			'wss://tracker.fastcast.nz',
-			'wss://tracker.openwebtorrent.com',
-			'wss://tracker.webtorrent.io'
+  cleanBody()
+  var client = new WebTorrent()
+  client.add({
+    infoHash: hash,
+    announce: [
+      'ws://tracker.steefmin.xyz',
+      'ws://[fc0e:528c:fc27:ce74:ca46:24d6:c9f5:90d6]:8000',
+      'wss://tracker.btorrent.xyz',
+      'wss://tracker.fastcast.nz',
+      'wss://tracker.openwebtorrent.com',
+      'wss://tracker.webtorrent.io'
     ]
   }, onTorrentDownload)
 }
@@ -175,9 +177,9 @@ function onTorrentSeed (torrent) {
 }
 
 // Attempt to shutdown gracefully
-function destroy(torrent) {
+function destroy (torrent) {
   window.addEventListener('beforeunload', function (e) {
-	torrent.destroy(console.log('torrent destroyed'))
+    torrent.destroy(console.log('torrent destroyed'))
   })
 }
 
@@ -200,15 +202,15 @@ function appendHolder (torrent) {
   var $holder = $('.holder')
   var $wrapper = $('.wrapper')
   torrent.files.forEach(function (file) {
-	var size = isShowable(file.name)
-	if (size.size) {
-		$holder.text('')
-		$wrapper.css({"width": size.size.toString()+size.type})
-		if (size.type === "px") {
-			size.size = size.size - 100
-		}
-		$holder.css({"width": size.size.toString()+size.type, "height": size.size.toString()+size.type})
-	}
+    var size = isShowable(file.name)
+    if (size.size) {
+      $holder.text('')
+      $wrapper.css({'width': size.size.toString() + size.type})
+      if (size.type === 'px') {
+        size.size = size.size - 100
+      }
+      $holder.css({'width': size.size.toString() + size.type, 'height': size.size.toString() + size.type})
+    }
     file.appendTo('.holder')
     file.getBlobURL(function (err, url) {
       if (err) {
@@ -251,11 +253,11 @@ function isShowable(filename) {
 }
 
 // initialize values for torrent info
-function initInfo() {
-	var $progress = $('.torrent-infos .progress p')
-	$progress.text("0%")
-	updateData(0,0,0,0)
-	updatePeer(0)
+function initInfo () {
+  var $progress = $('.torrent-infos .progress p')
+  $progress.text('0%')
+  updateData(0, 0, 0, 0)
+  updatePeer(0)
 }
 
 // bytes to formated data
