@@ -105,17 +105,6 @@ function initTorrent (torrent) {
 	appendHolder(torrent);
   });
 
-  torrent.on('infoHash',function () {
-	console.log('infoHash');
-    $instructions.text("Seeding");
-	$progress.text(Math.round(torrent.progress*10000)/100 + "%");
-  });
-
-  torrent.on('metadata', function () {
-	console.log('metadata');
-    $instructions.text("Finding peers");
-  });
-
   torrent.on('wire', function (wire) {
     console.log('new peer');
 	console.log(wire.type+":"+wire.peerId);
@@ -178,7 +167,6 @@ function cleanBody () {
 function onTorrentSeed (torrent) {
   console.log('Seeding ' + torrent.name);
   console.log('Hash: ' + torrent.infoHash);
-  torrent.progress = 1;
   updatePeer(torrent.numPeers);
   initTorrent(torrent);
   appendHolder(torrent);
@@ -264,6 +252,8 @@ function isShowable(filename) {
 
 // initialize values for torrent info
 function initInfo() {
+	var $progress = $('.torrent-infos .progress p');
+	$progress.text("0%");
 	updateData(0,0,0,0);
 	updatePeer(0);
 }
