@@ -98,9 +98,8 @@ p {
 .holder#hover {
     border: 10px dashed red;
 }
-.holder * {
+.holder :not(i) {
     width: 100%;
-    height: 100%;
 }
 .holder .upload-but {
     display: none;
