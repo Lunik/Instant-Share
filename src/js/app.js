@@ -1,7 +1,7 @@
 // Get Hash on hashchange
 $(window).bind(	'hashchange', function () {
   getHash()
-});
+})
 
 // Get Hash on loading page
 $(document).ready(function () {
@@ -19,7 +19,7 @@ function getHash () {
     var $holder = $('.holder')
     $holder.css('background', 'no-repeat center url("src/css/dashinfinity.gif")')
     var $instructions = $('.instructions')
-    $instructions.text("Fetching metadata")
+    $instructions.text('Fetching metadata')
     download(hash)
   }
 }
@@ -56,7 +56,7 @@ function initHolder () {
   $holder.on('dragleave', function (event) {
     event.preventDefault()
     event.stopPropagation()
-    this.id = '' 
+    this.id = ''
     return false
   })
 
@@ -80,8 +80,8 @@ function initHolder () {
 }
 
 function seed (file) {
-	console.log(file)
-	var client = new WebTorrent()
+  console.log(file)
+  var client = new WebTorrent()
   client.seed(file, {
     announce: [
       'ws://tracker.steefmin.xyz',
@@ -223,33 +223,33 @@ function appendHolder (torrent) {
 }
 
 // check if file is showable by extention
-function isShowable(filename) {
-	var res = filename.split('.')
-	var size = {size: false, type: "px"}
-	switch (res[res.length-1]) {
-		case "webm":
-		case "mp4":
-			size.size = 100
-			size.type = "%"
-			break;
-		case "pdf":
-			size.size = 900
-			break;
-		case "jpg":
-		case "jpeg":
-		case "png":
-		case "gif":
-		case "tif":
-		case "tiff":
-		case "txt":
-		case "svg":
-			size.size = 500
-			break
-		default:
-			size.size = false
-			break
+function isShowable (filename) {
+  var res = filename.split('.')
+  var size = {size: false, type: 'px'}
+  switch (res[res.length-1]) {
+    case 'webm':
+    case 'mp4':
+      size.size = 100
+      size.type = '%'
+      break
+    case 'pdf':
+      size.size = 900
+      break;
+    case 'jpg':
+    case 'jpeg':
+    case 'png':
+    case 'gif':
+    case 'tif':
+    case 'tiff':
+    case 'txt':
+    case 'svg':
+      size.size = 500
+      break
+    default:
+      size.size = false
+      break
 	}
-	return size
+  return size
 }
 
 // initialize values for torrent info
