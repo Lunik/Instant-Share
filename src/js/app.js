@@ -166,7 +166,7 @@ function onTorrentSeed (torrent) {
   updatePeer(torrent.numPeers)
   initTorrent(torrent)
   appendHolder(torrent)
-  prompt('Partager le lien:', document.location.hostname + '/#' + torrent.infoHash)
+  prompt('Partager le lien:', document.location.hostname + document.location.pathname +'/#' + torrent.infoHash)
   destroy(torrent)
 }
 
@@ -208,7 +208,7 @@ function appendHolder (torrent) {
         console.log(err)
       }
       showDownloadButton(file.name, url)
-      showInputUrl(document.location.hostname + '/#' + torrent.infoHash)
+      showInputUrl(document.location.hostname + document.location.pathname +'/#' + torrent.infoHash)
     })
   })
 }
