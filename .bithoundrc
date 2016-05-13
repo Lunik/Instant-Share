@@ -48,7 +48,7 @@
     "**/tests/**",
     "**/spec/**",
     "**/specs/**"
-  ]
+  ],
   "critics": {
     "lint": {"engine": "standard"}
   }
