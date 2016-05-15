@@ -177,7 +177,6 @@ function onTorrentSeed (torrent) {
   console.log('Seeding ' + torrent.name)
   console.log('Hash: ' + torrent.infoHash)
   updatePeer(torrent.numPeers)
-  appendHolder(torrent)
   var link = document.location.hostname + document.location.pathname + '/#' + torrent.infoHash
   link = link.replace(/\/+/g, '/')
   prompt('Partager le lien:', link)
