@@ -14,7 +14,14 @@ TRACKERS = [
   'ws://torrent.lunik.xyz:8000',
   'udp://torrent.lunik.xyz:8000',
   'http://torrent.lunik.xyz:8000/announce',
-  'wss://tracker.webtorrent.io'
+  'wss://tracker.webtorrent.io',
+  'udp://tracker.internetwarriors.net:1337',
+  'udp://tracker.leechers-paradise.org:6969',
+  'udp://tracker.coppersurfer.tk:6969',
+  'udp://exodus.desync.com:6969',
+  'wss://tracker.btorrent.xyz',
+  'wss://tracker.openwebtorrent.com',
+  'wss://tracker.fastcast.nz'
 ]
 
 // Get the hash and start torrent if there is an hash
@@ -100,15 +107,6 @@ function initTorrent (torrent) {
   var $holder = $('.holder')
   var $instructions = $('.instructions')
 
-  torrent.on('done', function () {
-    console.log('torrent finished downloading')
-    updatePeer(torrent.numPeers)
-    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
-    $holder.css('background', '')
-    updateFileName(torrent.name)
-    appendHolder(torrent)
-  })
-
   torrent.on('metadata', function () {
     console.log('meta')
     updateFileName(torrent.name)
@@ -119,16 +117,27 @@ function initTorrent (torrent) {
     appendHolder(torrent)
   })
 
-  torrent.on('wire', function (wire) {
-    console.log('new peer: ' + wire.remoteAddress + ':' + wire.remotePort)
-    updatePeer(torrent.numPeers)
-  })
-
   torrent.on('download', function (chunkSize) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
     updateProgress(Math.round(torrent.progress * 100))
     $instructions.text('Downloading')
+  })
+
+  torrent.on('wire', function (wire) {
+    console.log('new peer: ' + wire.remoteAddress + ':' + wire.remotePort)
+    updatePeer(torrent.numPeers)
+  })
+
+  torrent.on('done', function () {
+    console.log('torrent finished downloading')
+    updatePeer(torrent.numPeers)
+    updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
+    $holder.css('background', '')
+    
+    // to remove when ready, metadata event work
+    updateFileName(torrent.name)
+    appendHolder(torrent)
   })
 
   torrent.on('upload', function (data) {
