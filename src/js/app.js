@@ -10,6 +10,13 @@ $(document).ready(function () {
   getHash()
 })
 
+TRACKERS = [
+  'ws://torrent.lunik.xyz:8000',
+  'udp://torrent.lunik.xyz:8000',
+  'http://torrent.lunik.xyz:8000/announce',
+  'wss://tracker.webtorrent.io'
+]
+
 // Get the hash and start torrent if there is an hash
 function getHash () {
   var hash = window.location.hash.substring(1)
@@ -84,9 +91,7 @@ function seed (file) {
   console.log(file)
   var client = new WebTorrent()
   client.seed(file, {
-    announce: [
-      'ws://torrent.lunik.xyz:8000'
-    ]
+    announce: TRACKERS
   }, onTorrentSeed)
 }
 
@@ -137,9 +142,7 @@ function download (hash) {
   var client = new WebTorrent()
   client.add({
     infoHash: hash,
-    announce: [
-      'ws://torrent.lunik.xyz:8000'
-    ]
+    announce: TRACKERS
   }, onTorrentDownload)
 }
 
