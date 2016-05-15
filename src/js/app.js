@@ -93,16 +93,6 @@ function initHolder () {
   })
 }
 
-// Seed a file
-function seed (file) {
-  console.log(file)
-  var client = new WebTorrent()
-  var torrent = client.seed(file, {
-    announce: TRACKERS
-  }, onTorrentSeed)
-  initTorrent(torrent)
-}
-
 // Initialise event on torrent
 function initTorrent (torrent) {
   var $holder = $('.holder')
@@ -170,6 +160,16 @@ function onTorrentDownload (torrent) {
 // Clean holder body
 function cleanBody () {
   $('.holder').html('')
+}
+
+// Seed a file
+function seed (file) {
+  console.log(file)
+  var client = new WebTorrent()
+  var torrent = client.seed(file, {
+    announce: TRACKERS
+  }, onTorrentSeed)
+  initTorrent(torrent)
 }
 
 // Callback function when torrent is seeding
