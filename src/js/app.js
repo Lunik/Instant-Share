@@ -97,9 +97,10 @@ function initHolder () {
 function seed (file) {
   console.log(file)
   var client = new WebTorrent()
-  client.seed(file, {
+  var torrent = client.seed(file, {
     announce: TRACKERS
   }, onTorrentSeed)
+  initTorrent(torrent)
 }
 
 // Initialise event on torrent
@@ -108,12 +109,10 @@ function initTorrent (torrent) {
   var $instructions = $('.instructions')
 
   torrent.on('metadata', function () {
-    console.log('meta')
     updateFileName(torrent.name)
   })
 
   torrent.on('ready', function () {
-    console.log('ready')
     appendHolder(torrent)
   })
 
@@ -134,10 +133,6 @@ function initTorrent (torrent) {
     updatePeer(torrent.numPeers)
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     $holder.css('background', '')
-    
-    // to remove when ready, metadata event work
-    updateFileName(torrent.name)
-    appendHolder(torrent)
   })
 
   torrent.on('upload', function (data) {
@@ -159,16 +154,16 @@ function initTorrent (torrent) {
 function download (hash) {
   cleanBody()
   var client = new WebTorrent()
-  client.add({
+  var torrent = client.add({
     infoHash: hash,
     announce: TRACKERS
   }, onTorrentDownload)
+  initTorrent(torrent)
 }
 
 // Callback on torrent finish
 function onTorrentDownload (torrent) {
   console.log('Downloading ' + torrent.name)
-  initTorrent(torrent)
   destroy(torrent)
 }
 
@@ -182,7 +177,6 @@ function onTorrentSeed (torrent) {
   console.log('Seeding ' + torrent.name)
   console.log('Hash: ' + torrent.infoHash)
   updatePeer(torrent.numPeers)
-  initTorrent(torrent)
   appendHolder(torrent)
   var link = document.location.hostname + document.location.pathname + '/#' + torrent.infoHash
   link = link.replace(/\/+/g, '/')
