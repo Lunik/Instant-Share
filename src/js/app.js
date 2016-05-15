@@ -105,6 +105,15 @@ function initTorrent (torrent) {
     updatePeer(torrent.numPeers)
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     $holder.css('background', '')
+  })
+
+  torrent.on('metadata', function () {
+    console.log('meta')
+    updateFileName(torrent.name)
+  })
+
+  torrent.on('ready', function () {
+    console.log('ready')
     appendHolder(torrent)
   })
 
@@ -118,7 +127,6 @@ function initTorrent (torrent) {
     updatePeer(torrent.numPeers)
     $instructions.text('Downloading')
     updateProgress(Math.round(torrent.progress * 100))
-    updateFileName(torrent.name)
   })
 
   torrent.on('upload', function (data) {
@@ -150,7 +158,6 @@ function download (hash) {
 function onTorrentDownload (torrent) {
   console.log('Downloading ' + torrent.name)
   initTorrent(torrent)
-  appendHolder(torrent)
   destroy(torrent)
 }
 
