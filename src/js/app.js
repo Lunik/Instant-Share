@@ -10,7 +10,7 @@ $(document).ready(function () {
   getHash()
 })
 
-TRACKERS = [
+var TRACKERS = [
   'ws://torrent.lunik.xyz:8000',
   'udp://torrent.lunik.xyz:8000',
   'http://torrent.lunik.xyz:8000/announce',
