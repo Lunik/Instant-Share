@@ -105,6 +105,8 @@ function initTorrent (torrent) {
     updatePeer(torrent.numPeers)
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     $holder.css('background', '')
+    updateFileName(torrent.name)
+    appendHolder(torrent)
   })
 
   torrent.on('metadata', function () {
@@ -125,8 +127,8 @@ function initTorrent (torrent) {
   torrent.on('download', function (chunkSize) {
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
-    $instructions.text('Downloading')
     updateProgress(Math.round(torrent.progress * 100))
+    $instructions.text('Downloading')
   })
 
   torrent.on('upload', function (data) {
@@ -137,10 +139,10 @@ function initTorrent (torrent) {
 
   torrent.on('noPeers', function () {
     console.log('no peers')
-    $instructions.text('Seeding')
-    updateProgress(Math.round(torrent.progress * 100))
     updateData(torrent.uploaded, torrent.downloaded, torrent.uploadSpeed, torrent.downloadSpeed)
     updatePeer(torrent.numPeers)
+    updateProgress(Math.round(torrent.progress * 100))
+    $instructions.text('Seeding')
   })
 }
 
