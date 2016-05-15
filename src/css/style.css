@@ -98,7 +98,7 @@ p {
 .holder#hover {
     border: 10px dashed red;
 }
-.holder :not(i) {
+.holder :not(i) :not(p){
     width: 100%;
     height: 100%;
 }
