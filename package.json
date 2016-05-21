@@ -18,6 +18,9 @@
   "dependencies": {
     "webtorrent": "^0.93.2"
   },
+  "devDependencies": {
+    "standard": "^7.1.0"
+  },
   "standard": {
     "globals": [
       "$",
