@@ -12,6 +12,13 @@ var TRACKERS = [
   'wss://tracker.fastcast.nz'
 ]
 
+// turn magnet into hash
+function cleanHash (hash) {
+  var r = new RegExp('.*:')
+  var r2 = new RegExp('&.*')
+  return hash.replace(r, '').replace(r2, '')
+}
+
 // Get the hash and start torrent if there is an hash
 function getHash () {
   var hash = window.location.hash.substring(1)
@@ -24,13 +31,6 @@ function getHash () {
     $instructions.text('Fetching metadata')
     download(hash)
   }
-}
-
-// turn magnet into hash
-function cleanHash (hash) {
-  var r = new RegExp('.*:')
-  var r2 = new RegExp('&.*')
-  return hash.replace(r, '').replace(r2, '')
 }
 
 // Initialise seed torrent
