@@ -1,15 +1,3 @@
-// Get Hash on hashchange
-$(window).bind('hashchange', function () {
-  getHash()
-})
-
-// Get Hash on loading page
-$(document).ready(function () {
-  initHolder()
-  initInfo()
-  getHash()
-})
-
 var TRACKERS = [
   'ws://torrent.lunik.xyz:8000',
   'udp://torrent.lunik.xyz:8000',
@@ -296,3 +284,15 @@ function updateData (upBytes, downBytes, upSpeed, downSpeed) {
   var $downData = $('.torrent-infos .downloaded-data p')
   $downData.text(formatData(downBytes) + ' @' + formatSpeed(downSpeed))
 }
+
+// Get Hash on hashchange
+$(window).bind('hashchange', function () {
+  getHash()
+})
+
+// Get Hash on loading page
+$(document).ready(function () {
+  initHolder()
+  initInfo()
+  getHash()
+})

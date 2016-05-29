@@ -15,7 +15,7 @@ a:hover, a:focus, a:active {
 }
 
 p {
-	margin: 10px 0px 10px 0px;
+	margin: 10px 0;
 }
 /***********/
 
@@ -102,7 +102,7 @@ p {
     width: 100%;
     height: 100%;
 }
-.holder i.fa{
+.holder .fa{
   padding: 30% 10% 30% 10%;
 }
 .holder .upload-but {
@@ -116,9 +116,9 @@ p {
     cursor: pointer;
 }
 .holder .upload .button {
-    padding: 175px 0px 175px 0px;
+    padding: 175px 0;
     font-size: 80px;
-    margin: 0px;
+    margin: 0;
 }
 
 
@@ -130,7 +130,7 @@ p {
 
 /******************/
 
-.torrent-infos *{
+.torrent-infos > div{
   font-family: FontAwesome;
   display: inline-block;
 }
@@ -146,8 +146,8 @@ input[name=url] {
   font-family: sans-serif;
   font-weight: 500;
 }
-.torrent-infos > * {
-    padding: 0px 5px 0px 5px;
+.torrent-infos > div {
+    padding: 0 5px;
 }
 .torrent-infos .uploaded-data i{
   color: #F75353;
@@ -167,7 +167,7 @@ input[name=url] {
 
 .footer{
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   left: 16px;
 
   font-size: 12px;
