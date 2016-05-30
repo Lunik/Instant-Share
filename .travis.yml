@@ -9,10 +9,10 @@ node_js:
 before_install:
 - npm install standard -g
 
-job_standard:
+script:
 - standard
 
-job_deploy:
+deploy:
   provider: npm
   email: guillaume.lunik@gmail.com
   on:
