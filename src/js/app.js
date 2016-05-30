@@ -248,7 +248,9 @@ function initInfo () {
 // bytes to formated data
 function formatData (bytes) {
   var sizes = ['B', 'kB', 'MB', 'GB', 'TB']
-  if (bytes === 0) return '0 B'
+  if (bytes === 0) {
+    return '0 B'
+  }
   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
 }
@@ -256,7 +258,9 @@ function formatData (bytes) {
 // bits to formated speed
 function formatSpeed (bits) {
   var sizes = ['b/s', 'kb/s', 'Mb/s', 'Gb/s', 'Tb/s']
-  if (bits === 0) return '0 b/s'
+  if (bits === 0) {
+    return '0 b/s'
+  }
   var i = parseInt(Math.floor(Math.log(bits) / Math.log(1024)), 10)
   return Math.round(bits / Math.pow(1024, i), 2) + ' ' + sizes[i]
 }
