@@ -1,4 +1,6 @@
 # Instant-Share
+![build-badge](https://travis-ci.org/Lunik/Instant-Share.svg)
+
 Share your file with your friend trough torrent with WebTorrent and WEBRTC.
 
 Look like [Instant.io](http://instant.io) but in more intuitive and very lite!
