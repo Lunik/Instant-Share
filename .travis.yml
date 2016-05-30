@@ -3,9 +3,11 @@ notifications:
 language: node_js - "6" - "5" - "4"
 before_install:
 - npm install standard -g
-script:
+
+job_standard:
 - standard
-deploy:
+
+job_deploy:
   provider: npm
   email: guillaume.lunik@gmail.com
   on:
