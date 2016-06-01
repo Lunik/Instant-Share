@@ -130,10 +130,11 @@ p {
 
 /******************/
 
-.torrent-infos > div{
+.torrent-infos > div, .torrent-infos p{
   font-family: FontAwesome;
   display: inline-block;
 }
+
 input[name=url] {
     text-align: center;
     width: 400px;
