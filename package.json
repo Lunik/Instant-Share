@@ -3,7 +3,7 @@
   "version": "1.2.2",
   "description": "Share file directly to your friends",
   "scripts": {
-    "test": "echo \"Error: no test specified\""
+    "test": "echo \"Error: no test specified !\""
   },
   "repository": {
     "type": "git",
