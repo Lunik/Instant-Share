@@ -15,9 +15,9 @@ node_js:
 before_install:
 - npm install standard -g
 
-- add-apt-repository ppa:ubuntu-lxc/lxd-stable
-- apt-get update
-- apt-get install golang
+- sudo add-apt-repository ppa:ubuntu-lxc/lxd-stable
+- sudo apt-get update
+- sudo apt-get install golang
 - mkdir go
 - env GOPATH=./go/
 
