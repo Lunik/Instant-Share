@@ -1,5 +1,11 @@
+sudo: required
+
+services:
+  - docker
+
 notifications:
   email: false
+
 language: node_js 
 node_js:
 - '6' 
@@ -8,6 +14,18 @@ node_js:
 
 before_install:
 - npm install standard -g
+
+- add-apt-repository ppa:ubuntu-lxc/lxd-stable
+- apt-get update
+- apt-get install golang
+- mkdir go
+- env GOPATH=./go/
+
+- env CURDIR=.
+- go get github.com/openshift/source-to-image
+- cd ${GOPATH}/src/github.com/openshift/source-to-image
+- tree ${GOPATH}/src/github.com/openshift/source-to-image/_output/
+- hack/build-go.sh
 
 script:
 - standard
