@@ -27,7 +27,10 @@ script:
 - curl http://localhost:$PORT | grep "Instant Share"
 
 - VERSION=$(cat package.json | grep "webtorrent" | sed -e "s/.*\^\([0-9]*\.[0-9]*\.[0-9]*\)\".*/\1/")
+- echo Package Version: $VERSION
+
 - INCLUDE_VERSION=$(curl http://localhost:$PORT | grep -e "^.*script.*webtorrent.*$" | sed -e "s/.*\/\([0-9]*\.[0-9]*\.[0-9]*\)\/.*/\1/")
+- echo Include Version: $INCLUDE_VERSION
 
 - test $VERSION -eq $INCLUDE_VERSION
 
