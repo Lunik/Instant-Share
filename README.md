@@ -8,8 +8,10 @@ Look like [Instant.io](http://instant.io) but in more intuitive and very lite!
 ### [DEMO](http://fs.lunik.xyz)
 
 ### How to install ?
-
-  `$ git clone https://github.com/Lunik/Instant-share`  
+  ```
+  $ git clone https://github.com/Lunik/Instant-share
+  $ bower install
+  ```  
 
 Upload Instant-Share to your favorite hosting plan.
 That's all :)
