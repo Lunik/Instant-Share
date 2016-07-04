@@ -21,6 +21,8 @@ before_install:
 script:
 - standard
 
+- bower install
+
 - docker run -d -p $PORT:80 -v "$(pwd)":/usr/share/nginx/html nginx
 - sleep 10
 
