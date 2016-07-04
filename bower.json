@@ -1,0 +1,21 @@
+{
+  "name": "instant-share",
+  "description": "Share file directly to your friends",
+  "main": "",
+  "authors": [
+    "lunik <guillaume.lunik@gmail.com> (http://lunik.xyz)"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Lunik/Instant-Share",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.0.0",
+    "webtorrent": "^0.95.2"
+  }
+}
