@@ -10,29 +10,22 @@ language: node_js
 node_js:
 - '6'
 - '5'
-- '4'
 
 env:
   - PORT=5000
 
 before_install:
-- npm install standard -g
+- npm install standard bower -g
 
 script:
 - standard
+
+- bower install
 
 - docker run -d -p $PORT:80 -v "$(pwd)":/usr/share/nginx/html nginx
 - sleep 10
 
 - curl http://localhost:$PORT | grep "Instant Share"
-
-- VERSION=$(cat package.json | grep "webtorrent" | sed -e "s/.*\^\([0-9]*\.[0-9]*\.[0-9]*\)\".*/\1/")
-- echo "Package Version $VERSION"
-
-- INCLUDE_VERSION=$(curl http://localhost:$PORT | grep -e "^.*script.*webtorrent.*$" | sed -e "s/.*\/\([0-9]*\.[0-9]*\.[0-9]*\)\/.*/\1/")
-- echo "Include Version $INCLUDE_VERSION"
-
-- test $VERSION = $INCLUDE_VERSION
 
 deploy:
   provider: npm
