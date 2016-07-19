@@ -21,13 +21,14 @@
             </div>
             <p v-show="holder.fileName.length > 0">{{ holder.fileName }}</p>
         </div>
-        <p class="instructions">{{ instruction }}</p>
+        <p class="instructions" v-show="torrent.state.length === 0">Dépose un fichier dans la zone au dessus pour le partager.</p>
+        <p class="torrent-status" v-show="torrent.state.length > 0">{{ torrent.state }}</p>
         <a class="download-url"></a>
         <div class="torrent-infos">
-          <div class="progress"><i class="fa fa-heart"></i> <p></p></div>
-          <div class="peer"><i class="fa fa-users"></i> <p></p></div>
-          <div class="uploaded-data"><i class="fa fa-arrow-up"></i> <p></p></div>
-          <div class="downloaded-data"><i class="fa fa-arrow-down"></i> <p></p></div>
+          <div class="progress"><i class="fa fa-heart"></i> <p>{{ torrent.progress + '%'}}</p></div>
+          <div class="peer"><i class="fa fa-users"></i> <p>{{ torrent.peer }}</p></div>
+          <div class="uploaded-data"><i class="fa fa-arrow-up"></i> <p>{{ torrent.up + ' @' + torrent.sup }}</p></div>
+          <div class="downloaded-data"><i class="fa fa-arrow-down"></i> <p>{{ torrent.down + ' @' + torrent.sdown }}</p></div>
         </div>
         <div class="share-link" style="display:none">
           <p>Lien de partage:</p>

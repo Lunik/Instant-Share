@@ -78,7 +78,15 @@ var App = {}
         state: '',
         fileName: ''
       },
-      instruction: 'Dépose un fichier dans la zone au dessus pour le partager.'
+      torrent: {
+        state: '',
+        peer: 0,
+        progress: 0,
+        sup: App.Format.speed(0),
+        sdown: App.Format.speed(0),
+        up: App.Format.data(0),
+        down: App.Format.data(0)
+      }
     }
   })
 
@@ -100,10 +108,6 @@ var App = {}
       App.setStatus(true)
       return true
     }
-  }
-
-  App.setInstruction = function(instruction){
-    App.vue.$data.instruction = instruction
   }
 
   App.setFileName = function(name){
@@ -143,6 +147,65 @@ var App = {}
     $uploadBut.on('change', function () {
       App.setFileName(this.files[0].name)
       //seed(this.files[0])
+    })
+  }
+
+  App.setTorrentStatus = function(status){
+    App.vue.$data.torrent.state = status
+  }
+
+  App.setTorrentData = function(data){
+    for(var key in data){
+      App.vue.$data.torrent[key] = data[key]
+    }
+  }
+
+  App.initTorrent = function(torrent){
+    torrent.on('metadata', function () {
+      App.setFileName(torrent.name)
+    })
+
+    torrent.on('ready', function () {
+      //appendHolder(torrent)
+    })
+
+    torrent.on('download', function (chunkSize) {
+      App.setTorrentData({
+        progress: Math.round(torrent.progress * 100),
+        down: App.Format.data(torrent.downloaded),
+        sdown: App.Format.speed(torrent.downloadSpeed)
+      })
+      App.setTorrentStatus('Downloading')
+    })
+
+    torrent.on('wire', function (wire) {
+      App.setTorrentData({
+        peer: torrent.numPeers
+      })
+    })
+
+    torrent.on('done', function () {
+      App.setTorrentData({
+        peer: torrent.numPeers,
+        progress: Math.round(torrent.progress * 100),
+        up: App.Format.data(torrent.uploaded),
+        down: App.Format.data(torrent.downloaded),
+      })
+    })
+
+    torrent.on('upload', function (data) {
+      App.setTorrentData({
+        up: App.Format.data(torrent.uploaded),
+        sup: App.Format.speed(torrent.uploadSpeed),
+      })
+      App.setTorrentStatus('Uploading')
+    })
+
+    torrent.on('noPeers', function () {
+      App.setTorrentData({
+        peer: torrent.numPeers
+      })
+      App.setTorrentStatus('Seeding')
     })
   }
 
