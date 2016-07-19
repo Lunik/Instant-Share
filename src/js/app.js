@@ -66,4 +66,11 @@ var App = {}
   $(window).bind('hashchange', function () {
     App.hash = App.Format.hash(window.location.hash.substring(1))
   })
+
+  App.vue = new Vue({
+    el: 'body',
+    data: {
+      
+    }
+  })
 })()
