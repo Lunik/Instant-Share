@@ -12,13 +12,14 @@
 <body>
     <div class="wrapper">
 		<a class="status-link" href="/">
-        	<p class="status" id="success">Instant share</p>
+        	<p class="status" id="{{ app.state }}">{{ app.message }}</p>
 		</a>
-        <div class="holder">
-            <div class="upload">
+        <div class="holder" id="{{ holder.state }}">
+            <div class="upload" v-show="holder.fileName.length === 0">
                 <p class="button">+</p>
                 <input type="file" class="upload-but">
             </div>
+            <p v-show="holder.fileName.length > 0">{{ holder.fileName }}</p>
         </div>
         <p class="instructions">Dépose un fichier dans la zone au dessus pour le partager.</p>
         <a class="download-url"></a>

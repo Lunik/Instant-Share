@@ -73,25 +73,76 @@ var App = {}
       app: {
         state: 'success',
         message: 'Instant Share disponible'
+      },
+      holder: {
+        state: '',
+        fileName: ''
       }
     }
   })
 
-  App.checkStatus = function(){
-    if (typeof window.FileReader === 'undefined') {
-      App.vue.$data.app.state = 'fail'
-      App.vue.$data.app.message = 'Instant Share indisponible'
-      return false
-    } else {
+  App.setStatus = function(status){
+    if(status){
       App.vue.$data.app.state = 'success'
       App.vue.$data.app.message = 'Instant Share disponible'
+    } else {
+      App.vue.$data.app.state = 'fail'
+      App.vue.$data.app.message = 'Instant Share indisponible'
+    }
+  }
+  App.checkStatus = function(){
+    if (typeof window.FileReader === 'undefined') {
+      App.setStatus(false)
+      return false
+    } else {
+      App.setStatus(true)
       return true
     }
   }
 
+  App.updateFileName = function(name){
+    App.vue.$data.holder.fileName = name
+  }
+
+  App.initHolder = function(){
+    var $holder = $('.holder')
+    var $upload = $('.holder .upload .button')
+    var $uploadBut = $('.holder .upload-but')
+
+    $holder.on('dragover', function (event) {
+      event.preventDefault()
+      event.stopPropagation()
+      App.vue.$data.holder.state = 'hover'
+    })
+
+    $holder.on('dragleave', function (event) {
+      event.preventDefault()
+      event.stopPropagation()
+      App.vue.$data.holder.state = ''
+    })
+
+    $holder.on('drop', function (event) {
+      event.preventDefault()
+      event.stopPropagation()
+      App.vue.$data.holder.state = ''
+      var file = event.originalEvent.dataTransfer.files[0]
+      App.updateFileName(file.name)
+      //seed(file)
+    })
+
+    $upload.click(function () {
+      $uploadBut.trigger('click')
+    })
+
+    $uploadBut.on('change', function () {
+      App.updateFileName(this.files[0].name)
+      //seed(this.files[0])
+    })
+  }
+
   App.main = function(){
     if(App.checkStatus()){
-
+      App.initHolder()
     }
   }
 
