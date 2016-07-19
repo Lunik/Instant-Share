@@ -77,7 +77,8 @@ var App = {}
       holder: {
         state: '',
         fileName: ''
-      }
+      },
+      instruction: 'Dépose un fichier dans la zone au dessus pour le partager.'
     }
   })
 
@@ -90,6 +91,7 @@ var App = {}
       App.vue.$data.app.message = 'Instant Share indisponible'
     }
   }
+
   App.checkStatus = function(){
     if (typeof window.FileReader === 'undefined') {
       App.setStatus(false)
@@ -100,7 +102,11 @@ var App = {}
     }
   }
 
-  App.updateFileName = function(name){
+  App.setInstruction = function(instruction){
+    App.vue.$data.instruction = instruction
+  }
+
+  App.setFileName = function(name){
     App.vue.$data.holder.fileName = name
   }
 
@@ -126,7 +132,7 @@ var App = {}
       event.stopPropagation()
       App.vue.$data.holder.state = ''
       var file = event.originalEvent.dataTransfer.files[0]
-      App.updateFileName(file.name)
+      App.setFileName(file.name)
       //seed(file)
     })
 
@@ -135,7 +141,7 @@ var App = {}
     })
 
     $uploadBut.on('change', function () {
-      App.updateFileName(this.files[0].name)
+      App.setFileName(this.files[0].name)
       //seed(this.files[0])
     })
   }
