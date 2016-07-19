@@ -70,7 +70,30 @@ var App = {}
   App.vue = new Vue({
     el: 'body',
     data: {
-      
+      app: {
+        state: 'success',
+        message: 'Instant Share disponible'
+      }
     }
   })
+
+  App.checkStatus = function(){
+    if (typeof window.FileReader === 'undefined') {
+      App.vue.$data.app.state = 'fail'
+      App.vue.$data.app.message = 'Instant Share indisponible'
+      return false
+    } else {
+      App.vue.$data.app.state = 'success'
+      App.vue.$data.app.message = 'Instant Share disponible'
+      return true
+    }
+  }
+
+  App.main = function(){
+    if(App.checkStatus()){
+
+    }
+  }
+
+  App.main()
 })()
