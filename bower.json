@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "jquery": "^3.0.0",
-    "webtorrent": "^0.95.2"
+    "webtorrent": "^0.95.2",
+    "vue": "^1.0.26"
   }
 }
