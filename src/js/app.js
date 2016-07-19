@@ -1,4 +1,4 @@
-var App
+var App = {}
 ;(function () {
   App.Trackers = [
     'ws://torrent.lunik.xyz:8000',
@@ -13,12 +13,6 @@ var App
     'wss://tracker.openwebtorrent.com',
     'wss://tracker.fastcast.nz'
   ]
-
-  // Update the hash
-  App.hash = App.Format.hash(window.location.hash.substring(1))
-  $(window).bind('hashchange', function () {
-    App.hash = App.Format.hash(window.location.hash.substring(1))
-  })
 
   /**
    * Format module
@@ -66,4 +60,10 @@ var App
   }
 
   App.Format = new _Format()
+
+  // Update the hash
+  App.hash = App.Format.hash(window.location.hash.substring(1))
+  $(window).bind('hashchange', function () {
+    App.hash = App.Format.hash(window.location.hash.substring(1))
+  })
 })()
