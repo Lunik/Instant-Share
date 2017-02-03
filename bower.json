@@ -16,6 +16,6 @@
   ],
   "dependencies": {
     "jquery": "^3.0.0",
-    "webtorrent": "^0.96.0"
+    "webtorrent": "0.x"
   }
 }
